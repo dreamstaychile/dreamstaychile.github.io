@@ -1,7 +1,42 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Mis anuncios</title>
-<h1 style="font-family:system-ui; text-align:center; margin-top:40px;">Hola 👋</h1>
-<p style="text-align:center;">Si ves esto, GitHub Pages ya quedó ok.</p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dream Stay Chile - Propiedades</title>
+  <style>
+    :root { --max: 1200px; }
+    body { font-family: system-ui, Arial, sans-serif; margin: 0; background:#f7f7f7; }
+    header { background:#111; color:#fff; padding:20px; text-align:center; }
+    .grid {
+      max-width: var(--max); margin: 20px auto; padding: 0 12px;
+      display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+    .card { background:#fff; border:1px solid #eee; border-radius:10px; padding:10px; }
+    .airbnb-embed-frame { width:100% !important; height:300px !important; margin:auto; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Dream Stay Chile</h1>
+    <p>Encuentra tu próxima estadía</p>
+  </header>
+
+  <main class="grid">
+    <!-- Propiedad 1 -->
+    <div class="card">
+      <div class="airbnb-embed-frame"
+           data-id="1327869892487118396"
+           data-view="home"
+           data-hide-price="true">
+        <a href="https://es-l.airbnb.com/rooms/1327869892487118396?guests=1&adults=1&source=embed_widget">
+          Ver en Airbnb
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Carga el SDK de Airbnb UNA sola vez -->
+  <script async src="https://www.airbnb.cl/embeddable/airbnb_jssdk"></script>
+</body>
+</html>
