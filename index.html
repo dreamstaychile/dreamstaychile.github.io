@@ -5,94 +5,175 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Dream Stay Chile</title>
   <style>
+    /* Paleta estilo Airbnb */
     :root{
-      --rausch:#FF5A5F; --ink:#222; --ash:#717171; --fog:#F7F7F7; --line:#EBEBEB;
+      --coral:#FF385C;       /* primario Airbnb */
+      --ink:#222;            /* texto principal */
+      --ash:#717171;         /* texto secundario */
+      --fog:#F7F7F7;         /* fondo */
+      --line:#EBEBEB;        /* bordes suaves */
       --radius:12px; --max:1200px;
     }
     *{box-sizing:border-box} html,body{margin:0}
     body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--fog);color:var(--ink);overflow-x:hidden}
 
+    /* Header tipo Airbnb */
     header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
     .top{max-width:var(--max);margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:12px}
-    .brand{font-weight:800;letter-spacing:.2px;font-size:18px;color:var(--rausch)}
-    .sub{color:var(--ash);font-size:14px;margin-left:auto}
+    .brand{font-weight:800;letter-spacing:.2px;font-size:18px;color:var(--coral)}
+    nav{margin-left:auto;display:flex;gap:8px}
+    .tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;font-weight:700;cursor:pointer}
+    .tab.active{background:var(--ink);color:#fff;border-color:var(--ink)}
 
     main{max-width:var(--max);margin:20px auto;padding:0 12px}
     h1{font-size:20px;font-weight:800;margin:8px 4px;color:#000}
+
+    /* Tarjetas */
+    .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+    .meta{color:var(--ash);margin:6px 0}
+
+    /* Perfil */
+    .profile{display:grid;gap:16px;grid-template-columns:1fr;align-items:center}
+    @media(min-width:768px){ .profile{grid-template-columns:160px 1fr} }
+    .avatar{width:140px;height:140px;border-radius:50%;background:#eee;border:1px solid var(--line);overflow:hidden}
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+
+    /* Grid propiedades */
     .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
-    .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:12px;transition:transform .12s, box-shadow .12s}
-    .card:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,.06)}
+    .prop-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:12px;transition:transform .12s, box-shadow .12s}
+    .prop-card:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,.06)}
 
-    /* Contenedor responsive del embed */
-    .embed {
-      position:relative; width:100%;
-      aspect-ratio: 4/3;      /* base */
-      border-radius:10px; overflow:hidden;
-    }
-    /* Ajustes por tamaño: más alto en móviles, más ancho en desktop */
-    @media (max-width: 480px){ .embed{ aspect-ratio: 3/4; } }   /* móvil vertical: más alto */
-    @media (min-width: 768px){ .embed{ aspect-ratio: 16/11; } } /* tablet/desktop: un poco más ancho */
-
-    /* Fallback para navegadores sin aspect-ratio (iOS viejo) */
-    .embed::before{content:"";display:block;padding-top:75%}    /* 4:3 por defecto */
-    @media (max-width:480px){ .embed::before{padding-top:133%} }/* 3:4 en móvil */
-    @media (min-width:768px){ .embed::before{padding-top:68.75%} }/* ~16:11 */
-
-    .embed > .airbnb-embed-frame,
-    .embed iframe{
-      position:absolute; inset:0; width:100% !important; height:100% !important; border:0 !important; display:block;
-    }
-
-    .btn{
+    /* Botones */
+    .btn,.cta{
       display:inline-block;margin-top:10px;padding:10px 14px;border-radius:10px;
-      background:var(--rausch);color:#fff;text-decoration:none;font-weight:700
+      background:var(--coral);color:#fff;text-decoration:none;font-weight:700
     }
-    .btn:active{transform:translateY(1px)}
+    .btn:active,.cta:active{transform:translateY(1px)}
+
+    /* Embed responsive (sin scroll raro) */
+    .embed{position:relative;width:100%;aspect-ratio:4/3;border-radius:10px;overflow:hidden}
+    @media (max-width:480px){ .embed{aspect-ratio:3/4} }
+    @media (min-width:768px){ .embed{aspect-ratio:16/11} }
+    .embed > .airbnb-embed-frame,.embed iframe{
+      position:absolute;inset:0;width:100% !important;height:100% !important;border:0 !important;display:block
+    }
+
+    /* Secciones */
+    .section{display:none}
+    .section.active{display:block}
   </style>
 </head>
 <body>
   <header>
     <div class="top">
       <div class="brand">Dream Stay Chile</div>
-      <div class="sub">Estadías con estilo ✨</div>
+      <nav>
+        <button class="tab active" data-target="#perfil">Perfil</button>
+        <button class="tab" data-target="#propiedades">Propiedades</button>
+      </nav>
     </div>
   </header>
 
   <main>
-    <h1>Propiedades</h1>
-    <div class="grid">
-
-      <!-- Propiedad 1 -->
+    <!-- ===== Perfil ===== -->
+    <section id="perfil" class="section active">
+      <h1>Perfil</h1>
       <div class="card">
-        <div class="embed">
-          <div class="airbnb-embed-frame"
-               data-id="1327869892487118396"
-               data-view="home"
-               data-hide-price="true">
-            <a href="https://es-l.airbnb.com/rooms/1327869892487118396?guests=1&adults=1&source=embed_widget">
-              Ver en Airbnb
+        <div class="profile">
+          <div class="avatar">
+            <!-- Cambia este src por tu foto si quieres -->
+            <img src="https://i.imgur.com/8Km9tLL.jpg" alt="Foto de perfil" />
+          </div>
+          <div>
+            <h2 style="margin:0 0 6px 0;">Pablo Loyola · Dream Stay Chile</h2>
+            <div class="meta">Anfitrión en RM y litoral central · Anuncios verificados y con excelentes calificaciones</div>
+            <p style="margin:8px 0 12px 0;">
+              Catálogo de departamentos y cabañas seleccionadas. Reserva directa vía Airbnb con total seguridad.
+            </p>
+
+            <!-- Contacto: WhatsApp + Email -->
+            <div style="margin:12px 0; padding:12px; border:1px solid var(--line); border-radius:10px; background:var(--fog);">
+              <strong style="display:block; margin-bottom:6px; font-size:14px; color:var(--ash);">Contacto directo</strong>
+              <div style="margin-bottom:4px;">
+                📱 <a href="https://wa.me/56958363333" target="_blank" style="color:var(--ink); text-decoration:none;">+56 9 5836 3333</a>
+              </div>
+              <div>
+                ✉️ <a href="mailto:pablo.loyola@dreamstaychile.com" style="color:var(--ink); text-decoration:none;">pablo.loyola@dreamstaychile.com</a>
+              </div>
+            </div>
+
+            <a class="cta" href="https://www.airbnb.cl/users/show/666423154" target="_blank" rel="nofollow">
+              Ver mi perfil en Airbnb
             </a>
           </div>
         </div>
-        <a class="btn" href="https://es-l.airbnb.com/rooms/1327869892487118396?guests=1&adults=1" target="_blank" rel="nofollow">Reservar</a>
       </div>
+    </section>
 
-      <!-- DUPLICA desde aquí para más anuncios: cambia solo data-id y los href -->
-      <!--
-      <div class="card">
-        <div class="embed">
-          <div class="airbnb-embed-frame" data-id="OTRO_ID" data-view="home" data-hide-price="true">
-            <a href="https://www.airbnb.com/rooms/OTRO_ID?source=embed_widget">Ver en Airbnb</a>
-          </div>
-        </div>
-        <a class="btn" href="https://www.airbnb.com/rooms/OTRO_ID" target="_blank" rel="nofollow">Reservar</a>
-      </div>
-      -->
+    <!-- ===== Propiedades ===== -->
+    <section id="propiedades" class="section">
+      <h1>Propiedades</h1>
 
-    </div>
+      <!-- Lista de IDs: agrega/quita aquí y se generan solas -->
+      <script>
+        window.AIRBNB_IDS = [
+          "1327869892487118396", // Macul
+          "1342382177576530441", // Las Cruces
+          "1309025605678101056", // Laguna Verde
+          "1387208229861682695", // San José de Maipo
+          "1353666716201755327", // Providencia
+          "1157524877445108764", // La Serena
+          "1449582640394243022", // Santiago
+          "1184043971058046693", // La Florida
+          "1346246986058237472", // Santiago
+          "1210388349630634191", // Las Condes
+          "1415933101260155691", // Ñuñoa
+          "1415950214087729957"  // Estación Central
+        ];
+      </script>
+
+      <!-- Contenedor -->
+      <div class="grid" id="listings"></div>
+    </section>
   </main>
 
-  <!-- Carga el SDK de Airbnb una sola vez -->
+  <!-- Tabs -->
+  <script>
+    document.querySelectorAll('.tab').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+        const target = document.querySelector(btn.dataset.target);
+        if(target) target.classList.add('active');
+        // Si cambian a Propiedades después de cargar, re-inicializa embeds
+        if(btn.dataset.target==="#propiedades" && window.AirbnbEmbed){
+          window.AirbnbEmbed.init();
+        }
+      });
+    });
+  </script>
+
+  <!-- Generación de cards -->
+  <script>
+    (function(){
+      const mount = document.getElementById('listings');
+      const ids = (window.AIRBNB_IDS||[]);
+      if(!mount) return;
+      mount.innerHTML = ids.map(id => `
+        <div class="prop-card">
+          <div class="embed">
+            <div class="airbnb-embed-frame" data-id="${id}" data-view="home" data-hide-price="true">
+              <a href="https://es-l.airbnb.com/rooms/${id}?guests=1&adults=1&source=embed_widget">Ver en Airbnb</a>
+            </div>
+          </div>
+          <a class="btn" href="https://es-l.airbnb.com/rooms/${id}?guests=1&adults=1" target="_blank" rel="nofollow">Reservar</a>
+        </div>
+      `).join('');
+    })();
+  </script>
+
+  <!-- SDK Airbnb (una sola vez al final) -->
   <script async src="https://www.airbnb.cl/embeddable/airbnb_jssdk"></script>
 </body>
 </html>
