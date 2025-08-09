@@ -1,66 +1,67 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Dream Stay Chile</title>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<style>
-  :root{--coral:#FF385C;--ink:#222;--ash:#717171;--fog:#F7F7F7;--line:#EBEBEB;--radius:12px;--max:1200px}
-  *{box-sizing:border-box} html,body{margin:0}
-  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--fog);color:var(--ink);overflow-x:hidden}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dream Stay Chile</title>
+  <style>
+    /* Paleta estilo Airbnb */
+    :root{
+      --coral:#FF385C;       /* primario Airbnb */
+      --ink:#222;            /* texto principal */
+      --ash:#717171;         /* texto secundario */
+      --fog:#F7F7F7;         /* fondo */
+      --line:#EBEBEB;        /* bordes suaves */
+      --radius:12px; --max:1200px;
+    }
+    *{box-sizing:border-box} html,body{margin:0}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--fog);color:var(--ink);overflow-x:hidden}
 
-  header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
-  .top{max-width:var(--max);margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:12px}
-  .brand{font-weight:800;letter-spacing:.2px;font-size:18px;color:var(--coral)}
-  nav{margin-left:auto;display:flex;gap:8px}
-  .tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;font-weight:700;cursor:pointer}
-  .tab.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+    /* Header tipo Airbnb */
+    header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
+    .top{max-width:var(--max);margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:12px}
+    .brand{font-weight:800;letter-spacing:.2px;font-size:18px;color:var(--coral)}
+    nav{margin-left:auto;display:flex;gap:8px}
+    .tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;font-weight:700;cursor:pointer}
+    .tab.active{background:var(--ink);color:#fff;border-color:var(--ink)}
 
-  main{max-width:var(--max);margin:20px auto;padding:0 12px}
-  h1{font-size:20px;font-weight:800;margin:8px 4px;color:#000}
+    main{max-width:var(--max);margin:20px auto;padding:0 12px}
+    h1{font-size:20px;font-weight:800;margin:8px 4px;color:#000}
 
-  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px}
-  .profile{display:grid;gap:16px;grid-template-columns:1fr;align-items:center}
-  @media(min-width:768px){ .profile{grid-template-columns:160px 1fr} }
-  .avatar{width:140px;height:140px;border-radius:50%;background:#eee;border:1px solid var(--line);overflow:hidden}
-  .avatar img{width:100%;height:100%;object-fit:cover;display:block}
-  .meta{color:var(--ash);margin:6px 0}
-  .cta,.btn{display:inline-block;margin-top:10px;padding:10px 14px;border-radius:10px;background:var(--coral);color:#fff;text-decoration:none;font-weight:700}
-  .cta:active,.btn:active{transform:translateY(1px)}
+    /* Tarjetas */
+    .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+    .meta{color:var(--ash);margin:6px 0}
 
-  .section{display:none}
-  .section.active{display:block}
+    /* Perfil */
+    .profile{display:grid;gap:16px;grid-template-columns:1fr;align-items:center}
+    @media(min-width:768px){ .profile{grid-template-columns:160px 1fr} }
+    .avatar{width:140px;height:140px;border-radius:50%;background:#eee;border:1px solid var(--line);overflow:hidden}
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
 
-  .wrap{display:grid;grid-template-columns:1fr;gap:12px}
-  @media(min-width:1024px){ .wrap{grid-template-columns:48% 52%} }
-  .left{height:auto}
-  @media(min-width:1024px){ .left{height:calc(100dvh - 110px); overflow:auto} }
-  .right{position:relative}
-  @media(min-width:1024px){ .right{height:calc(100dvh - 110px); position:sticky; top:94px} }
+    /* Grid propiedades */
+    .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+    .prop-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:12px;transition:transform .12s, box-shadow .12s}
+    .prop-card:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,.06)}
 
-  .controls{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;display:grid;gap:10px}
-  .controls .grid{display:grid;gap:8px;grid-template-columns:1fr}
-  @media(min-width:640px){ .controls .grid{grid-template-columns:1fr 1fr} }
-  .controls input,.controls select{padding:10px;border:1px solid var(--line);border-radius:10px;outline:0}
-  .controls .row{display:flex;gap:8px;flex-wrap:wrap}
-  .chip{border:1px solid var(--line);border-radius:999px;padding:8px 12px;font-weight:700;background:#fff;cursor:pointer}
-  .chip.primary{background:var(--coral);color:#fff;border-color:var(--coral)}
-  .list{display:grid;gap:12px;margin-top:12px}
-  .prop-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px}
-  .row{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
-  .row .sub{color:var(--ash);font-size:14px}
+    /* Botones */
+    .btn,.cta{
+      display:inline-block;margin-top:10px;padding:10px 14px;border-radius:10px;
+      background:var(--coral);color:#fff;text-decoration:none;font-weight:700
+    }
+    .btn:active,.cta:active{transform:translateY(1px)}
 
-  .embed{position:relative;width:100%;aspect-ratio:3/2;border-radius:10px;overflow:hidden}
-  .embed .airbnb-embed-frame,.embed iframe{position:absolute;inset:0;width:100% !important;height:100% !important;border:0 !important;display:block}
+    /* Embed responsive (sin scroll raro) */
+    .embed{position:relative;width:100%;aspect-ratio:4/3;border-radius:10px;overflow:hidden}
+    @media (max-width:480px){ .embed{aspect-ratio:3/4} }
+    @media (min-width:768px){ .embed{aspect-ratio:16/11} }
+    .embed > .airbnb-embed-frame,.embed iframe{
+      position:absolute;inset:0;width:100% !important;height:100% !important;border:0 !important;display:block
+    }
 
-  #map{width:100%;height:360px;border-radius:12px;border:1px solid var(--line);background:#fff}
-  @media(min-width:1024px){ #map{height:100%} }
-
-  footer{background:#F7F7F7;border-top:1px solid #EBEBEB;padding:40px 20px;margin-top:40px;font-size:14px;color:#484848}
-  .foot{max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:30px;align-items:flex-start}
-  .foot a{color:#484848;text-decoration:none}
-</style>
+    /* Secciones */
+    .section{display:none}
+    .section.active{display:block}
+  </style>
 </head>
 <body>
   <header>
@@ -68,113 +69,75 @@
       <div class="brand">Dream Stay Chile</div>
       <nav>
         <button class="tab active" data-target="#perfil">Perfil</button>
-        <button class="tab" data-target="#explorar">Explorar</button>
+        <button class="tab" data-target="#propiedades">Propiedades</button>
       </nav>
     </div>
   </header>
 
   <main>
-    <!-- PERFIL -->
+    <!-- ===== Perfil ===== -->
     <section id="perfil" class="section active">
       <h1>Perfil</h1>
       <div class="card">
         <div class="profile">
           <div class="avatar">
-            <img src="https://i.postimg.cc/DyXCnD4n/IMG-0260.jpg" alt="Foto de perfil" />
+            <!-- Cambia este src por tu foto si quieres -->
+            <img src="https://i.imgur.com/8Km9tLL.jpg" alt="Foto de perfil" />
           </div>
           <div>
             <h2 style="margin:0 0 6px 0;">Pablo Loyola · Dream Stay Chile</h2>
             <div class="meta">Anfitrión en RM y litoral central · Anuncios verificados y con excelentes calificaciones</div>
-            <p style="margin:8px 0 12px 0;">Catálogo de departamentos y cabañas seleccionadas. Reserva directa vía Airbnb con total seguridad.</p>
+            <p style="margin:8px 0 12px 0;">
+              Catálogo de departamentos y cabañas seleccionadas. Reserva directa vía Airbnb con total seguridad.
+            </p>
+
+            <!-- Contacto: WhatsApp + Email -->
             <div style="margin:12px 0; padding:12px; border:1px solid var(--line); border-radius:10px; background:var(--fog);">
               <strong style="display:block; margin-bottom:6px; font-size:14px; color:var(--ash);">Contacto directo</strong>
-              <div style="margin-bottom:4px;">📱 <a href="https://wa.me/56958363333" target="_blank" style="color:var(--ink); text-decoration:none;">+56 9 5836 3333</a></div>
-              <div>✉️ <a href="mailto:pablo.loyola@dreamstaychile.com" style="color:var(--ink); text-decoration:none;">pablo.loyola@dreamstaychile.com</a></div>
+              <div style="margin-bottom:4px;">
+                📱 <a href="https://wa.me/56958363333" target="_blank" style="color:var(--ink); text-decoration:none;">+56 9 5836 3333</a>
+              </div>
+              <div>
+                ✉️ <a href="mailto:pablo.loyola@dreamstaychile.com" style="color:var(--ink); text-decoration:none;">pablo.loyola@dreamstaychile.com</a>
+              </div>
             </div>
-            <a class="cta" href="https://www.airbnb.cl/users/show/666423154" target="_blank" rel="nofollow">Ver mi perfil en Airbnb</a>
+
+            <a class="cta" href="https://www.airbnb.cl/users/show/666423154" target="_blank" rel="nofollow">
+              Ver mi perfil en Airbnb
+            </a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- EXPLORAR -->
-    <section id="explorar" class="section">
-      <h1>Explorar</h1>
-      <div class="wrap">
-        <!-- Panel izquierdo -->
-        <section class="left">
-          <div class="controls">
-            <div class="grid">
-              <input id="q" type="search" placeholder="Buscar por nombre o ciudad…">
-              <select id="city"></select>
-            </div>
-            <div class="grid">
-              <input id="checkin" type="date" placeholder="Check-in">
-              <input id="checkout" type="date" placeholder="Check-out">
-            </div>
-            <div class="row">
-              <input id="adults" type="number" min="1" value="2" style="width:120px" />
-              <button id="clear" class="chip">Limpiar</button>
-            </div>
-          </div>
+    <!-- ===== Propiedades ===== -->
+    <section id="propiedades" class="section">
+      <h1>Propiedades</h1>
 
-          <div id="count" style="padding:6px 2px;color:var(--ash);font-size:14px"></div>
-          <div class="list" id="list"></div>
-        </section>
+      <!-- Lista de IDs: agrega/quita aquí y se generan solas -->
+      <script>
+        window.AIRBNB_IDS = [
+          "1327869892487118396", // Macul
+          "1342382177576530441", // Las Cruces
+          "1309025605678101056", // Laguna Verde
+          "1387208229861682695", // San José de Maipo
+          "1353666716201755327", // Providencia
+          "1157524877445108764", // La Serena
+          "1449582640394243022", // Santiago
+          "1184043971058046693", // La Florida
+          "1346246986058237472", // Santiago
+          "1210388349630634191", // Las Condes
+          "1415933101260155691", // Ñuñoa
+          "1415950214087729957"  // Estación Central
+        ];
+      </script>
 
-        <!-- Mapa -->
-        <aside class="right">
-          <div id="map"></div>
-        </aside>
-      </div>
+      <!-- Contenedor -->
+      <div class="grid" id="listings"></div>
     </section>
   </main>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="foot">
-      <div>
-        <img src="https://i.postimg.cc/DyXCnD4n/IMG-0260.jpg" alt="Pablo Loyola" style="width:70px;height:70px;border-radius:50%;object-fit:cover;margin-bottom:10px;">
-        <h3 style="margin:0;font-size:16px;font-weight:bold;">Pablo Loyola</h3>
-        <p style="margin:5px 0;">Dream Stay Chile SpA</p>
-        <p style="margin:5px 0;"><a href="mailto:pablo.loyola@dreamstaychile.com" style="color:#FF5A5F;">pablo.loyola@dreamstaychile.com</a></p>
-        <p style="margin:5px 0;"><a href="https://wa.me/56958363333" target="_blank" style="color:#25D366;">WhatsApp: +56 9 5836 3333</a></p>
-      </div>
-      <div>
-        <h4 style="margin-bottom:8px;font-size:14px;font-weight:bold;">Navegación</h4>
-        <ul style="list-style:none;padding:0;margin:0;">
-          <li><a href="#perfil">Perfil</a></li>
-          <li><a href="#explorar">Explorar</a></li>
-          <li><a href="https://www.airbnb.cl/users/show/666423154" target="_blank">Perfil Airbnb</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 style="margin-bottom:8px;font-size:14px;font-weight:bold;">Información</h4>
-        <p style="margin:0;">© <span id="year"></span> Dream Stay Chile SpA</p>
-        <p style="margin:5px 0;">Todos los derechos reservados.</p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- DATA (puedo añadir capacidad real si me pasas cada una) -->
-  <script>
-  const LISTINGS = [
-    { id:"1327869892487118396", nombre:"Depto Macul", ciudad:"Macul, Santiago", lat:-33.491, lng:-70.598 },
-    { id:"1342382177576530441", nombre:"Las Cruces Vista Mar", ciudad:"Las Cruces", lat:-33.458, lng:-71.634 },
-    { id:"1309025605678101056", nombre:"Laguna Verde", ciudad:"Laguna Verde", lat:-33.089, lng:-71.670 },
-    { id:"1387208229861682695", nombre:"Cabaña Cajón", ciudad:"San José de Maipo", lat:-33.617, lng:-70.383 },
-    { id:"1353666716201755327", nombre:"Providencia 1D", ciudad:"Providencia, Santiago", lat:-33.426, lng:-70.615 },
-    { id:"1157524877445108764", nombre:"La Serena Dept", ciudad:"La Serena", lat:-29.902, lng:-71.251 },
-    { id:"1449582640394243022", nombre:"Santiago Centro", ciudad:"Santiago", lat:-33.45, lng:-70.66 },
-    { id:"1184043971058046693", nombre:"La Florida 2D", ciudad:"La Florida, Santiago", lat:-33.535, lng:-70.566 },
-    { id:"1346246986058237472", nombre:"Santiago 1D", ciudad:"Santiago", lat:-33.45, lng:-70.66 },
-    { id:"1210388349630634191", nombre:"Las Condes Studio", ciudad:"Las Condes, Santiago", lat:-33.408, lng:-70.567 },
-    { id:"1415933101260155691", nombre:"Ñuñoa 2D", ciudad:"Ñuñoa, Santiago", lat:-33.456, lng:-70.595 },
-    { id:"1415950214087729957", nombre:"Estación Central", ciudad:"Estación Central, Santiago", lat:-33.463, lng:-70.701 },
-  ];
-  </script>
-
-  <!-- TABS -->
+  <!-- Tabs -->
   <script>
     document.querySelectorAll('.tab').forEach(btn=>{
       btn.addEventListener('click', ()=>{
@@ -183,116 +146,34 @@
         document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
         const target = document.querySelector(btn.dataset.target);
         if(target) target.classList.add('active');
-        if(btn.dataset.target==="#explorar" && window.AirbnbEmbed){ AirbnbEmbed.init(); }
+        // Si cambian a Propiedades después de cargar, re-inicializa embeds
+        if(btn.dataset.target==="#propiedades" && window.AirbnbEmbed){
+          window.AirbnbEmbed.init();
+        }
       });
     });
-    document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 
-  <!-- Filtros + Mapa + actualización de links con fechas/huéspedes -->
+  <!-- Generación de cards -->
   <script>
-    const citySel = document.getElementById('city');
-    const cities = ["Todas las ciudades", ...Array.from(new Set(LISTINGS.map(x=>x.ciudad)))].sort((a,b)=>a.localeCompare(b));
-    cities.forEach(c => { const opt=document.createElement('option'); opt.value=(c==="Todas las ciudades"?"":c); opt.textContent=c; citySel.appendChild(opt); });
-    citySel.value="";
-
-    const listEl = document.getElementById('list');
-    const countEl = document.getElementById('count');
-    const qEl = document.getElementById('q');
-    const inIn = document.getElementById('checkin');
-    const inOut = document.getElementById('checkout');
-    const inAdults = document.getElementById('adults');
-    const btnClear = document.getElementById('clear');
-
-    function fmt(d){ return d ? d : ""; }
-    function buildParams(){
-      const params = [];
-      if(inIn.value) params.push(`check_in=${inIn.value}`);
-      if(inOut.value) params.push(`check_out=${inOut.value}`);
-      const a = Math.max(1, parseInt(inAdults.value||"2",10));
-      if(a) params.push(`adults=${a}`);
-      return params.length ? `?${params.join('&')}` : '';
-    }
-
-    function render(items){
-      countEl.textContent = `${items.length} propiedad(es)`;
-      const qs = buildParams();
-      listEl.innerHTML = items.map(x => `
-        <div class="prop-card" data-id="${x.id}">
+    (function(){
+      const mount = document.getElementById('listings');
+      const ids = (window.AIRBNB_IDS||[]);
+      if(!mount) return;
+      mount.innerHTML = ids.map(id => `
+        <div class="prop-card">
           <div class="embed">
-            <div class="airbnb-embed-frame" data-id="${x.id}" data-view="home" data-hide-price="true">
-              <a href="https://es-l.airbnb.com/rooms/${x.id}${qs}&source=embed_widget">Ver en Airbnb</a>
+            <div class="airbnb-embed-frame" data-id="${id}" data-view="home" data-hide-price="true">
+              <a href="https://es-l.airbnb.com/rooms/${id}?guests=1&adults=1&source=embed_widget">Ver en Airbnb</a>
             </div>
           </div>
-          <div class="row">
-            <div>
-              <div style="font-weight:800">${x.nombre}</div>
-              <div class="sub">${x.ciudad}</div>
-            </div>
-            <a class="btn" href="https://es-l.airbnb.com/rooms/${x.id}${qs}" target="_blank" rel="nofollow">Reservar</a>
-          </div>
+          <a class="btn" href="https://es-l.airbnb.com/rooms/${id}?guests=1&adults=1" target="_blank" rel="nofollow">Reservar</a>
         </div>
       `).join('');
-      if (window.AirbnbEmbed) AirbnbEmbed.init();
-      listEl.querySelectorAll('.prop-card').forEach(card=>{
-        card.addEventListener('mouseenter', ()=> highlight(card.dataset.id, true));
-        card.addEventListener('mouseleave', ()=> highlight(card.dataset.id, false));
-        card.addEventListener('click', ()=> focusPin(card.dataset.id));
-      });
-    }
-
-    function currentFiltered(){
-      const term = (qEl.value||"").trim().toLowerCase();
-      const city = citySel.value;
-      return LISTINGS.filter(x =>
-        (!city || x.ciudad === city) &&
-        (!term || x.nombre.toLowerCase().includes(term) || x.ciudad.toLowerCase().includes(term))
-      );
-    }
-
-    function filter(){ const out = currentFiltered(); render(out); drawMarkers(out); }
-    qEl.addEventListener('input', filter);
-    citySel.addEventListener('change', filter);
-    inIn.addEventListener('change', ()=> render(currentFiltered()));   // reescribe links
-    inOut.addEventListener('change', ()=> render(currentFiltered()));  // reescribe links
-    inAdults.addEventListener('input', ()=> render(currentFiltered())); // reescribe links
-    btnClear.addEventListener('click', ()=>{
-      qEl.value = ""; citySel.value = ""; inIn.value=""; inOut.value=""; inAdults.value="2"; filter();
-    });
-
-    // MAPA
-    let map, markers = {};
-    function initMap(){
-      map = L.map('map', { scrollWheelZoom:false }).setView([-33.45,-70.66], 10);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:19}).addTo(map);
-      drawMarkers(LISTINGS);
-    }
-    function drawMarkers(items){
-      Object.values(markers).forEach(m=>map.removeLayer(m));
-      markers = {};
-      const group = [];
-      items.forEach(x=>{
-        if(typeof x.lat!=='number'||typeof x.lng!=='number') return;
-        const m = L.marker([x.lat,x.lng]).addTo(map).bindPopup(`<strong>${x.nombre}</strong><br>${x.ciudad}`);
-        m.on('click', ()=>{
-          const el = listEl.querySelector(\`.prop-card[data-id="\${x.id}"]\`);
-          if(el) el.scrollIntoView({behavior:'smooth', block:'center'});
-        });
-        markers[x.id]=m; group.push(m);
-      });
-      if(group.length){
-        const fg = L.featureGroup(group); map.fitBounds(fg.getBounds().pad(0.2));
-      }
-    }
-    function highlight(id, on){ const m = markers[id]; if(!m) return; m.setOpacity(on?1:0.8); if(on) m.openPopup(); else m.closePopup(); }
-    function focusPin(id){ const m = markers[id]; if(!m) return; map.setView(m.getLatLng(), 14, {animate:true}); m.openPopup(); }
-
-    // boot
-    render(LISTINGS);
-    document.addEventListener('DOMContentLoaded', ()=> { initMap(); });
+    })();
   </script>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- SDK Airbnb (una sola vez al final) -->
   <script async src="https://www.airbnb.cl/embeddable/airbnb_jssdk"></script>
 </body>
 </html>
