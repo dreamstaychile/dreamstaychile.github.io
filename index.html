@@ -1,178 +1,265 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dream Stay Chile</title>
-  <style>
-    /* Paleta estilo Airbnb */
-    :root{
-      --coral:#FF385C;       /* primario Airbnb */
-      --ink:#222;            /* texto principal */
-      --ash:#717171;         /* texto secundario */
-      --fog:#F7F7F7;         /* fondo */
-      --line:#EBEBEB;        /* bordes suaves */
-      --radius:12px; --max:1200px;
-    }
-    *{box-sizing:border-box} html,body{margin:0}
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--fog);color:var(--ink);overflow-x:hidden}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dream Stay Chile · Alojamiento con confianza</title>
 
-    /* Header tipo Airbnb */
-    header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
-    .top{max-width:var(--max);margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:12px}
-    .brand{font-weight:800;letter-spacing:.2px;font-size:18px;color:var(--coral)}
-    nav{margin-left:auto;display:flex;gap:8px}
-    .tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;font-weight:700;cursor:pointer}
-    .tab.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+<!-- Meta / Open Graph -->
+<meta name="description" content="Dream Stay Chile: alojamientos seleccionados en RM y litoral central. Contacto directo por WhatsApp, email o llamada.">
+<meta property="og:title" content="Dream Stay Chile">
+<meta property="og:description" content="Alojamientos seleccionados · Contacto directo · Catálogo completo">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.dreamstaychile.com/">
+<meta property="og:image" content="https://i.postimg.cc/DyXCnD4n/IMG-0260.jpg">
 
-    main{max-width:var(--max);margin:20px auto;padding:0 12px}
-    h1{font-size:20px;font-weight:800;margin:8px 4px;color:#000}
+<style>
+  /* ===== Diseño base (inspiración boutique) ===== */
+  :root{
+    --brand:#FF385C;   /* acento */
+    --ink:#1f1f1f;
+    --muted:#6f6f6f;
+    --bg:#ffffff;
+    --bg-soft:#fafafa;
+    --line:#eaeaea;
+    --radius:14px;
+    --max:1100px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+  a{color:inherit}
 
-    /* Tarjetas */
-    .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px}
-    .meta{color:var(--ash);margin:6px 0}
+  /* Header minimal */
+  header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.85);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--line)}
+  .nav{max-width:var(--max);margin:0 auto;display:flex;align-items:center;gap:16px;padding:12px}
+  .logo{font-weight:900;letter-spacing:.3px;color:var(--brand)}
+  .spacer{flex:1}
+  .pill{border:1px solid var(--line);border-radius:999px;padding:8px 12px;text-decoration:none}
+  .pill:hover{border-color:var(--ink)}
 
-    /* Perfil */
-    .profile{display:grid;gap:16px;grid-template-columns:1fr;align-items:center}
-    @media(min-width:768px){ .profile{grid-template-columns:160px 1fr} }
-    .avatar{width:140px;height:140px;border-radius:50%;background:#eee;border:1px solid var(--line);overflow:hidden}
-    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+  /* Hero */
+  .hero{
+    position:relative; min-height:68vh; display:grid; place-items:center; text-align:center; color:#fff;
+    background:url('https://images.unsplash.com/photo-1505692794403-34d4982f88aa?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+  }
+  .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,.45))}
+  .hero-inner{position:relative;max-width:820px;padding:24px}
+  .brandmark{font-weight:900; font-size:38px; letter-spacing:.4px}
+  .tag{margin:10px 0 20px; font-size:16px; opacity:.95}
+  .cta-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .btn{display:inline-block;border-radius:12px;padding:12px 16px;font-weight:700;text-decoration:none}
+  .btn-primary{background:var(--brand); color:#fff}
+  .btn-ghost{border:1px solid #fff; color:#fff}
+  .btn:hover{transform:translateY(-1px)}
 
-    /* Grid propiedades */
-    .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
-    .prop-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:12px;transition:transform .12s, box-shadow .12s}
-    .prop-card:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,.06)}
+  /* Contenido */
+  main{max-width:var(--max);margin:30px auto;padding:0 14px}
+  .section{margin:28px 0}
+  h2{font-size:22px;margin:0 0 8px}
+  .muted{color:var(--muted)}
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px}
 
-    /* Botones */
-    .btn,.cta{
-      display:inline-block;margin-top:10px;padding:10px 14px;border-radius:10px;
-      background:var(--coral);color:#fff;text-decoration:none;font-weight:700
-    }
-    .btn:active,.cta:active{transform:translateY(1px)}
+  /* About */
+  .about{display:grid;gap:18px;grid-template-columns:1fr}
+  @media(min-width:800px){ .about{grid-template-columns:160px 1fr} }
+  .avatar{width:140px;height:140px;border-radius:50%;overflow:hidden;border:1px solid var(--line)}
+  .avatar img{width:100%;height:100%;object-fit:cover}
 
-    /* Embed responsive (sin scroll raro) */
-    .embed{position:relative;width:100%;aspect-ratio:4/3;border-radius:10px;overflow:hidden}
-    @media (max-width:480px){ .embed{aspect-ratio:3/4} }
-    @media (min-width:768px){ .embed{aspect-ratio:16/11} }
-    .embed > .airbnb-embed-frame,.embed iframe{
-      position:absolute;inset:0;width:100% !important;height:100% !important;border:0 !important;display:block
-    }
+  /* Destacadas */
+  .grid{display:grid;gap:14px;grid-template-columns:1fr}
+  @media(min-width:720px){ .grid{grid-template-columns:repeat(3,1fr)} }
+  .prop{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;transition:box-shadow .15s}
+  .prop:hover{box-shadow:0 8px 26px rgba(0,0,0,.08)}
+  .thumb{position:relative;aspect-ratio:3/2;overflow:hidden}
+  .thumb iframe,.thumb .airbnb-embed-frame{position:absolute;inset:0;width:100% !important;height:100% !important;border:0 !important}
+  .prop-body{padding:12px}
+  .prop-title{font-weight:800}
+  .prop-city{color:var(--muted);font-size:14px;margin-top:4px}
+  .prop-actions{display:flex;gap:8px;margin-top:10px}
+  .chip{flex:1;text-align:center;border-radius:10px;padding:10px 12px;text-decoration:none;font-weight:700}
+  .chip-primary{background:var(--brand);color:#fff}
+  .chip-outline{border:1px solid var(--line);}
 
-    /* Secciones */
-    .section{display:none}
-    .section.active{display:block}
-  </style>
+  /* Tira contacto */
+  .contact-strip{
+    margin-top:20px; padding:14px; border:1px solid var(--line); border-radius:12px; background:var(--bg-soft);
+    display:grid; gap:10px; grid-template-columns:1fr;
+  }
+  @media(min-width:640px){ .contact-strip{grid-template-columns:1fr 1fr 1fr} }
+  .contact-item{display:flex;align-items:center;gap:10px; padding:10px; border-radius:10px; background:#fff; border:1px solid var(--line)}
+  .contact-item a{color:var(--ink); text-decoration:none}
+
+  /* Footer */
+  footer{margin-top:36px;padding:30px 14px;border-top:1px solid var(--line);background:#fff}
+  .foot{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  .copy{color:var(--muted);font-size:14px}
+
+  /* WhatsApp flotante */
+  .whats{
+    position:fixed; right:14px; bottom:14px; width:54px; height:54px; border-radius:50%;
+    background:#25D366; display:grid; place-items:center; color:#fff; font-weight:900; text-decoration:none;
+    box-shadow:0 10px 30px rgba(0,0,0,.15); z-index:30;
+  }
+</style>
 </head>
 <body>
-  <header>
-    <div class="top">
-      <div class="brand">Dream Stay Chile</div>
-      <nav>
-        <button class="tab active" data-target="#perfil">Perfil</button>
-        <button class="tab" data-target="#propiedades">Propiedades</button>
-      </nav>
+
+<header>
+  <div class="nav">
+    <div class="logo">Dream Stay Chile</div>
+    <div class="spacer"></div>
+    <a class="pill" href="#propiedades">Propiedades</a>
+    <a class="pill" href="#contacto">Contacto</a>
+    <a class="pill" href="https://www.airbnb.cl/users/show/666423154" target="_blank" rel="nofollow">Perfil Airbnb</a>
+  </div>
+</header>
+
+<section class="hero" role="banner" aria-label="Portada Dream Stay Chile">
+  <div class="overlay"></div>
+  <div class="hero-inner">
+    <div class="brandmark">Dream Stay Chile</div>
+    <p class="tag">Alojamientos seleccionados en RM y litoral central · Atención directa y confiable</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://wa.me/56958363333" target="_blank">Escríbeme por WhatsApp</a>
+      <a class="btn btn-ghost" href="#propiedades">Ver propiedades</a>
     </div>
-  </header>
+  </div>
+</section>
 
-  <main>
-    <!-- ===== Perfil ===== -->
-    <section id="perfil" class="section active">
-      <h1>Perfil</h1>
-      <div class="card">
-        <div class="profile">
-          <div class="avatar">
-            <img src="https://i.postimg.cc/DyXCnD4n/IMG-0260.jpg" alt="Foto de perfil" />
+<main>
+  <!-- Sobre mí -->
+  <section class="section" id="sobre">
+    <h2>Sobre Dream Stay Chile</h2>
+    <div class="about card">
+      <div class="avatar">
+        <img src="https://i.postimg.cc/DyXCnD4n/IMG-0260.jpg" alt="Pablo Loyola">
+      </div>
+      <div>
+        <p>Soy <strong>Pablo Loyola</strong>. Gestiono y cuido alojamientos con foco en diseño, limpieza y respuesta rápida. Mi objetivo es que tu estadía sea simple: encuentras, reservas y disfrutas.</p>
+        <p class="muted">12 propiedades activas entre Santiago y la costa · Calificaciones sobresalientes</p>
+        <div class="contact-strip">
+          <div class="contact-item">
+            📞 <a href="tel:+56958363333">+56 9 5836 3333</a>
           </div>
-          <div>
-            <h2 style="margin:0 0 6px 0;">Pablo Loyola · Dream Stay Chile</h2>
-            <div class="meta">Anfitrión en RM y litoral central · Anuncios verificados y con excelentes calificaciones</div>
-            <p style="margin:8px 0 12px 0;">
-              Catálogo de departamentos y cabañas seleccionadas. Reserva directa vía Airbnb con total seguridad.
-            </p>
-
-            <!-- Contacto: WhatsApp + Email -->
-            <div style="margin:12px 0; padding:12px; border:1px solid var(--line); border-radius:10px; background:var(--fog);">
-              <strong style="display:block; margin-bottom:6px; font-size:14px; color:var(--ash);">Contacto directo</strong>
-              <div style="margin-bottom:4px;">
-                📱 <a href="https://wa.me/56958363333" target="_blank" style="color:var(--ink); text-decoration:none;">+56 9 5836 3333</a>
-              </div>
-              <div>
-                ✉️ <a href="mailto:pablo.loyola@dreamstaychile.com" style="color:var(--ink); text-decoration:none;">pablo.loyola@dreamstaychile.com</a>
-              </div>
-            </div>
-
-            <a class="cta" href="https://www.airbnb.cl/users/show/666423154" target="_blank" rel="nofollow">
-              Ver mi perfil en Airbnb
-            </a>
+          <div class="contact-item">
+            💬 <a href="https://wa.me/56958363333" target="_blank">WhatsApp directo</a>
+          </div>
+          <div class="contact-item">
+            ✉️ <a href="mailto:pablo.loyola@dreamstaychile.com">pablo.loyola@dreamstaychile.com</a>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ===== Propiedades ===== -->
-    <section id="propiedades" class="section">
-      <h1>Propiedades</h1>
+  <!-- Propiedades destacadas -->
+  <section class="section" id="propiedades" aria-label="Propiedades destacadas">
+    <h2>Propiedades destacadas</h2>
+    <p class="muted" style="margin-bottom:10px">Una muestra de mi catálogo. Puedes ver el listado completo en el botón de abajo.</p>
 
-      <!-- Lista de IDs: agrega/quita aquí y se generan solas -->
-      <script>
-        window.AIRBNB_IDS = [
-          "1327869892487118396", // Macul
-          "1342382177576530441", // Las Cruces
-          "1309025605678101056", // Laguna Verde
-          "1387208229861682695", // San José de Maipo
-          "1353666716201755327", // Providencia
-          "1157524877445108764", // La Serena
-          "1449582640394243022", // Santiago
-          "1184043971058046693", // La Florida
-          "1346246986058237472", // Santiago
-          "1210388349630634191", // Las Condes
-          "1415933101260155691", // Ñuñoa
-          "1415950214087729957"  // Estación Central
-        ];
-      </script>
-
-      <!-- Contenedor -->
-      <div class="grid" id="listings"></div>
-    </section>
-  </main>
-
-  <!-- Tabs -->
-  <script>
-    document.querySelectorAll('.tab').forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
-        btn.classList.add('active');
-        document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-        const target = document.querySelector(btn.dataset.target);
-        if(target) target.classList.add('active');
-        // Si cambian a Propiedades después de cargar, re-inicializa embeds
-        if(btn.dataset.target==="#propiedades" && window.AirbnbEmbed){
-          window.AirbnbEmbed.init();
-        }
-      });
-    });
-  </script>
-
-  <!-- Generación de cards -->
-  <script>
-    (function(){
-      const mount = document.getElementById('listings');
-      const ids = (window.AIRBNB_IDS||[]);
-      if(!mount) return;
-      mount.innerHTML = ids.map(id => `
-        <div class="prop-card">
-          <div class="embed">
-            <div class="airbnb-embed-frame" data-id="${id}" data-view="home" data-hide-price="true">
-              <a href="https://es-l.airbnb.com/rooms/${id}?guests=1&adults=1&source=embed_widget">Ver en Airbnb</a>
-            </div>
+    <div class="grid">
+      <!-- Card 1 -->
+      <article class="prop">
+        <div class="thumb">
+          <div class="airbnb-embed-frame" data-id="1353666716201755327" data-view="home" data-hide-price="true">
+            <a href="https://es-l.airbnb.com/rooms/1353666716201755327?source=embed_widget">Ver en Airbnb</a>
           </div>
-          <a class="btn" href="https://es-l.airbnb.com/rooms/${id}?guests=1&adults=1" target="_blank" rel="nofollow">Reservar</a>
         </div>
-      `).join('');
-    })();
-  </script>
+        <div class="prop-body">
+          <div class="prop-title">Providencia 1D</div>
+          <div class="prop-city">Providencia, Santiago</div>
+          <div class="prop-actions">
+            <a class="chip chip-primary" href="https://es-l.airbnb.com/rooms/1353666716201755327" target="_blank" rel="nofollow">Reservar</a>
+            <a class="chip chip-outline" href="https://www.dreamstaychile.com/#propiedades">Ver catálogo</a>
+          </div>
+        </div>
+      </article>
 
-  <!-- SDK Airbnb (una sola vez al final) -->
-  <script async src="https://www.airbnb.cl/embeddable/airbnb_jssdk"></script>
+      <!-- Card 2 -->
+      <article class="prop">
+        <div class="thumb">
+          <div class="airbnb-embed-frame" data-id="1327869892487118396" data-view="home" data-hide-price="true">
+            <a href="https://es-l.airbnb.com/rooms/1327869892487118396?source=embed_widget">Ver en Airbnb</a>
+          </div>
+        </div>
+        <div class="prop-body">
+          <div class="prop-title">Depto Macul</div>
+          <div class="prop-city">Macul, Santiago</div>
+          <div class="prop-actions">
+            <a class="chip chip-primary" href="https://es-l.airbnb.com/rooms/1327869892487118396" target="_blank" rel="nofollow">Reservar</a>
+            <a class="chip chip-outline" href="https://www.dreamstaychile.com/#propiedades">Ver catálogo</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="prop">
+        <div class="thumb">
+          <div class="airbnb-embed-frame" data-id="1342382177576530441" data-view="home" data-hide-price="true">
+            <a href="https://es-l.airbnb.com/rooms/1342382177576530441?source=embed_widget">Ver en Airbnb</a>
+          </div>
+        </div>
+        <div class="prop-body">
+          <div class="prop-title">Las Cruces Vista Mar</div>
+          <div class="prop-city">Las Cruces</div>
+          <div class="prop-actions">
+            <a class="chip chip-primary" href="https://es-l.airbnb.com/rooms/1342382177576530441" target="_blank" rel="nofollow">Reservar</a>
+            <a class="chip chip-outline" href="https://www.dreamstaychile.com/#propiedades">Ver catálogo</a>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div style="text-align:center;margin-top:16px">
+      <a class="btn btn-primary" href="https://www.dreamstaychile.com/#propiedades">Ver todas las propiedades</a>
+    </div>
+  </section>
+
+  <!-- Confianza / CTA rápido -->
+  <section class="section card" id="contacto">
+    <h2>¿Dudas o fechas especiales?</h2>
+    <p class="muted" style="margin-bottom:12px">Escríbeme directo y te ayudo a elegir la mejor opción.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://wa.me/56958363333" target="_blank">WhatsApp</a>
+      <a class="btn" style="border:1px solid var(--line)" href="mailto:pablo.loyola@dreamstaychile.com">Enviar email</a>
+      <a class="btn" style="border:1px solid var(--line)" href="tel:+56958363333">Llamar</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="foot">
+    <div class="logo">Dream Stay Chile</div>
+    <div class="copy">© <span id="year"></span> Dream Stay Chile SpA — Santiago, Chile</div>
+  </div>
+</footer>
+
+<!-- WhatsApp flotante -->
+<a class="whats" href="https://wa.me/56958363333" aria-label="WhatsApp" target="_blank">WA</a>
+
+<!-- Airbnb SDK -->
+<script async src="https://www.airbnb.cl/embeddable/airbnb_jssdk"></script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+<!-- Schema.org (mejora SEO y confianza en tarjetas) -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Organization",
+  "name":"Dream Stay Chile",
+  "url":"https://www.dreamstaychile.com/",
+  "logo":"https://i.postimg.cc/DyXCnD4n/IMG-0260.jpg",
+  "contactPoint":[{
+    "@type":"ContactPoint",
+    "telephone":"+56-9-5836-3333",
+    "contactType":"customer service",
+    "areaServed":"CL"
+  }],
+  "sameAs":["https://www.airbnb.cl/users/show/666423154"]
+}
+</script>
 </body>
 </html>
