@@ -96,17 +96,31 @@
   .copy{color:var(--muted);font-size:14px}
 
   /* WhatsApp flotante */
-  .whats{
-    position:fixed; right:14px; bottom:14px; width:54px; height:54px; border-radius:50%;
-    background:#25D366; display:grid; place-items:center; color:#fff; font-weight:900; text-decoration:none;
-    box-shadow:0 10px 30px rgba(0,0,0,.15); z-index:30;
+  .whats {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px; /* tamaño del botón */
+    height: 60px;
+    background-color: #25D366; /* verde oficial WhatsApp */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease;
+    z-index: 1000;
   }
+
+  .whats:hover {
+    transform: scale(1.1);
+  }
+
   .whats img {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  display: inline-block;
-}
+    width: 65%; /* ícono blanco ocupa la mayor parte del botón */
+    height: 65%;
+    object-fit: contain;
+  }
 </style>
 </head>
 <body>
