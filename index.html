@@ -1,248 +1,419 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dream Stay Chile</title>
-  <style>
-    :root {
-      --brand: #FF385C;
-      --dark: #222;
-      --light: #fff;
-      --gray: #717171;
-      --radius: 12px;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: system-ui, sans-serif; background: #f7f7f7; color: var(--dark); overflow-x: hidden; }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dream Stay Chile · Alojamiento con confianza</title>
 
-    header {
-      background: var(--light);
-      padding: 16px;
-      border-bottom: 1px solid #ebebeb;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-    .brand { color: var(--brand); font-weight: bold; font-size: 20px; }
+<!-- Meta / Open Graph -->
+<meta name="description" content="Dream Stay Chile: alojamientos seleccionados en RM y litoral central. Contacto directo por WhatsApp, email o llamada.">
+<meta property="og:title" content="Dream Stay Chile">
+<meta property="og:description" content="Alojamientos seleccionados · Contacto directo · Catálogo completo">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.dreamstaychile.com/">
+<meta property="og:image" content="https://i.postimg.cc/DyXCnD4n/IMG-0260.jpg">
 
-    main { max-width: 1200px; margin: auto; padding: 20px; }
-    h1 { font-size: 22px; margin-bottom: 16px; }
+<style>
+  /* ===== Diseño base (inspiración boutique) ===== */
+  :root{
+    --brand:#FF385C;   /* acento */
+    --ink:#1f1f1f;
+    --muted:#6f6f6f;
+    --bg:#ffffff;
+    --bg-soft:#fafafa;
+    --line:#eaeaea;
+    --radius:14px;
+    --max:1100px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+  a{color:inherit}
 
-    /* Propiedades */
-    .props-grid {
-      display: grid;
-      gap: 16px;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    }
-    .prop {
-      background: var(--light);
-      border: 1px solid #ebebeb;
-      border-radius: var(--radius);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.12s, box-shadow 0.12s;
-    }
-    .prop:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.06); }
-    .thumb {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      overflow: hidden;
-    }
-    .thumb .airbnb-embed-frame {
-      position: absolute;
-      inset: 0;
-      width: 100% !important;
-      height: 100% !important;
-      border: 0 !important;
-    }
-    .thumb a[href*="airbnb.com"] {
-      display: none !important; /* Oculta "Ver en Airbnb" */
-    }
+  /* Header minimal */
+  header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.85);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--line)}
+  .nav{max-width:var(--max);margin:0 auto;display:flex;align-items:center;gap:16px;padding:12px}
+  .logo{font-weight:900;letter-spacing:.3px;color:var(--brand)}
+  .spacer{flex:1}
+  .pill{border:1px solid var(--line);border-radius:999px;padding:8px 12px;text-decoration:none}
+  .pill:hover{border-color:var(--ink)}
 
-    .prop-body { padding: 12px; }
-    .prop-title { font-weight: bold; font-size: 16px; margin-bottom: 4px; }
-    .prop-city { font-size: 14px; color: var(--gray); margin-bottom: 8px; }
-    .prop-actions { display: flex; gap: 8px; }
-    .chip {
-      padding: 6px 10px;
-      border-radius: 20px;
-      font-size: 14px;
-      text-decoration: none;
-      text-align: center;
-    }
-    .chip-primary { background: var(--brand); color: var(--light); }
-  </style>
+    /* Hero */
+  .hero{
+    position:relative; min-height:98vh; display:grid; place-items:center; text-align:center; color:#fff;
+    background:url('https://www.dreamstaychile.com/assets/hero.jpg') center/cover no-repeat;
+  }
+  .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,.45))}
+  .hero-inner{position:relative;max-width:820px;padding:24px}
+  .brandmark{font-weight:900; font-size:38px; letter-spacing:.4px}
+  .tag{margin:10px 0 20px; font-size:16px; opacity:.95}
+  .cta-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .btn{display:inline-block;border-radius:12px;padding:12px 16px;font-weight:700;text-decoration:none}
+  .btn-primary{background:var(--brand); color:#fff}
+  .btn-ghost{border:1px solid #fff; color:#fff}
+  .btn:hover{transform:translateY(-1px)}
+
+  /* Contenido */
+  main{max-width:var(--max);margin:30px auto;padding:0 14px}
+  .section{margin:28px 0}
+  h2{font-size:22px;margin:0 0 8px}
+  .muted{color:var(--muted)}
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+
+  /* About */
+  .about{display:grid;gap:18px;grid-template-columns:1fr}
+  @media(min-width:800px){ .about{grid-template-columns:160px 1fr} }
+  .avatar{width:140px;height:140px;border-radius:50%;overflow:hidden;border:1px solid var(--line)}
+  .avatar img{width:100%;height:100%;object-fit:cover}
+
+  /* Destacadas */
+  .grid{display:grid;gap:14px;grid-template-columns:1fr}
+  @media(min-width:720px){ .grid{grid-template-columns:repeat(3,1fr)} }
+  .prop{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;transition:box-shadow .15s}
+  .prop:hover{box-shadow:0 8px 26px rgba(0,0,0,.08)}
+  .thumb{position:relative;aspect-ratio:3/2;overflow:hidden}
+  .thumb iframe,.thumb .airbnb-embed-frame{position:absolute;inset:0;width:100% !important;height:100% !important;border:0 !important}
+  .prop-body{padding:12px}
+  .prop-title{font-weight:800}
+  .prop-city{color:var(--muted);font-size:14px;margin-top:4px}
+  .prop-actions{display:flex;gap:8px;margin-top:10px}
+  .chip{flex:1;text-align:center;border-radius:10px;padding:10px 12px;text-decoration:none;font-weight:700}
+  .chip-primary{background:var(--brand);color:#fff}
+  .chip-outline{border:1px solid var(--line);}
+
+  /* Tira contacto */
+  .contact-strip{
+    margin-top:20px; padding:14px; border:1px solid var(--line); border-radius:12px; background:var(--bg-soft);
+    display:grid; gap:10px; grid-template-columns:1fr;
+  }
+  @media(min-width:640px){ .contact-strip{grid-template-columns:1fr 1fr 1fr} }
+  .contact-item{display:flex;align-items:center;gap:10px; padding:10px; border-radius:10px; background:#fff; border:1px solid var(--line)}
+  .contact-item a{color:var(--ink); text-decoration:none}
+
+  /* Footer */
+  footer{margin-top:36px;padding:30px 14px;border-top:1px solid var(--line);background:#fff}
+  .foot{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  .copy{color:var(--muted);font-size:14px}
+
+  /* WhatsApp flotante */
+  .whats {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px; /* tamaño del botón */
+    height: 60px;
+    background-color: #25D366; /* verde oficial WhatsApp */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease;
+    z-index: 1000;
+  }
+
+  .whats:hover {
+    transform: scale(1.1);
+  }
+
+  .whats img {
+    width: 100%; /* ícono blanco ocupa la mayor parte del botón */
+    height: 100%;
+    object-fit: contain;
+  }
+</style>
 </head>
 <body>
-  <header>
-    <div class="brand">Dream Stay Chile</div>
-  </header>
 
-  <main>
-    <h1>Propiedades</h1>
-    <div class="props-grid">
+<header>
+  <div class="nav">
+    <div class="logo">Dream Stay Chile</div>
+    <div class="spacer"></div>
+    <a class="pill" href="#propiedades">Propiedades</a>
+    <a class="pill" href="#contacto">Contacto</a>
+    <a class="pill" href="https://www.airbnb.cl/users/show/666423154" target="_blank" rel="nofollow">Perfil Airbnb</a>
+  </div>
+</header>
 
-      <article class="prop">
-        <div class="thumb">
-          <div class="airbnb-embed-frame" data-id="1327869892487118396" data-view="home" data-hide-price="true"></div>
-        </div>
-        <div class="prop-body">
-          <div class="prop-title">Macul Moderno</div>
-          <div class="prop-city">Macul</div>
-          <div class="prop-actions">
-            <a class="chip chip-primary" href="https://es-l.airbnb.com/rooms/1327869892487118396" target="_blank" rel="nofollow">Reservar</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="prop">
-        <div class="thumb">
-          <div class="airbnb-embed-frame" data-id="1342382177576530441" data-view="home" data-hide-price="true"></div>
-        </div>
-        <div class="prop-body">
-          <div class="prop-title">Las Cruces Vista Mar</div>
-          <div class="prop-city">Las Cruces</div>
-          <div class="prop-actions">
-            <a class="chip chip-primary" href="https://es-l.airbnb.com/rooms/1342382177576530441" target="_blank" rel="nofollow">Reservar</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="prop">
-        <div class="thumb">
-          <div class="airbnb-embed-frame" data-id="1309025605678101056" data-view="home" data-hide-price="true"></div>
-        </div>
-        <div class="prop-body">
-          <div class="prop-title">Cabaña Laguna Verde</div>
-          <div class="prop-city">Valparaíso</div>
-          <div class="prop-actions">
-            <a class="chip chip-primary" href="https://es-l.airbnb.com/rooms/1309025605678101056" target="_blank" rel="nofollow">Reservar</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="prop">
-        <div class="thumb">
-          <div class="airbnb-embed-frame" data-id="1387208229861682695" data-view="home" data-hide-price="true"></div>
-        </div>
-        <div class="prop-body">
-          <div class="prop-title">San José de Maipo Relax</div>
-          <div class="prop-city">San José de Maipo</div>
-          <div class="prop-actions">
-            <a class="chip chip-primary" href="https://es-l.airbnb.com/rooms/1387208229861682695" target="_blank" rel="nofollow">Reservar</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="prop">
-        <div class="thumb">
-          <div class="airbnb-embed-frame" data-id="1353666716201755327" data-view="home" data-hide-price="true"></div>
-        </div>
-        <div class="prop-body">
-          <div class="prop-title">Departamento Providencia</div>
-          <div class="prop-city">Santiago</div>
-          <div class="prop-actions">
-            <a class="chip chip-primary" href="https://es-l.airbnb.com/rooms/1353666716201755327" target="_blank" rel="nofollow">Reservar</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="prop">
-        <div class="thumb">
-          <div class="airbnb-embed-frame" data-id="1157524877445108764" data-view="home" data-hide-price="true"></div>
-        </div>
-        <div class="prop-body">
-          <div class="prop-title">Depto La Serena</div>
-          <div class="prop-city">La Serena</div>
-          <div class="prop-actions">
-            <a class="chip chip-primary" href="https://es-l.airbnb.com/rooms/1157524877445108764" target="_blank" rel="nofollow">Reservar</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="prop">
-        <div class="thumb">
-          <div class="airbnb-embed-frame" data-id="1449582640394243022" data-view="home" data-hide-price="true"></div>
-        </div>
-        <div class="prop-body">
-          <div class="prop-title">Depto Santiago Centro</div>
-          <div class="prop-city">Santiago</div>
-          <div class="prop-actions">
-            <a class="chip chip-primary" href="https://es-l.airbnb.com/rooms/1449582640394243022" target="_blank" rel="nofollow">Reservar</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="prop">
-        <div class="thumb">
-          <div class="airbnb-embed-frame" data-id="1184043971058046693" data-view="home" data-hide-price="true"></div>
-        </div>
-        <div class="prop-body">
-          <div class="prop-title">Depto La Florida</div>
-          <div class="prop-city">La Florida</div>
-          <div class="prop-actions">
-            <a class="chip chip-primary" href="https://es-l.airbnb.com/rooms/1184043971058046693" target="_blank" rel="nofollow">Reservar</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="prop">
-        <div class="thumb">
-          <div class="airbnb-embed-frame" data-id="1346246986058237472" data-view="home" data-hide-price="true"></div>
-        </div>
-        <div class="prop-body">
-          <div class="prop-title">Depto Santiago Moderno</div>
-          <div class="prop-city">Santiago</div>
-          <div class="prop-actions">
-            <a class="chip chip-primary" href="https://es-l.airbnb.com/rooms/1346246986058237472" target="_blank" rel="nofollow">Reservar</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="prop">
-        <div class="thumb">
-          <div class="airbnb-embed-frame" data-id="1210388349630634191" data-view="home" data-hide-price="true"></div>
-        </div>
-        <div class="prop-body">
-          <div class="prop-title">Depto Las Condes</div>
-          <div class="prop-city">Las Condes</div>
-          <div class="prop-actions">
-            <a class="chip chip-primary" href="https://es-l.airbnb.com/rooms/1210388349630634191" target="_blank" rel="nofollow">Reservar</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="prop">
-        <div class="thumb">
-          <div class="airbnb-embed-frame" data-id="1415933101260155691" data-view="home" data-hide-price="true"></div>
-        </div>
-        <div class="prop-body">
-          <div class="prop-title">Depto Ñuñoa</div>
-          <div class="prop-city">Ñuñoa</div>
-          <div class="prop-actions">
-            <a class="chip chip-primary" href="https://es-l.airbnb.com/rooms/1415933101260155691" target="_blank" rel="nofollow">Reservar</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="prop">
-        <div class="thumb">
-          <div class="airbnb-embed-frame" data-id="1415950214087729957" data-view="home" data-hide-price="true"></div>
-        </div>
-        <div class="prop-body">
-          <div class="prop-title">Depto Estación Central</div>
-          <div class="prop-city">Estación Central</div>
-          <div class="prop-actions">
-            <a class="chip chip-primary" href="https://es-l.airbnb.com/rooms/1415950214087729957" target="_blank" rel="nofollow">Reservar</a>
-          </div>
-        </div>
-      </article>
-
+<section class="hero" role="banner" aria-label="Portada Dream Stay Chile">
+  <div class="overlay"></div>
+  <div class="hero-inner">
+    <div class="brandmark">Dream Stay Chile</div>
+    <p class="tag">Alojamientos seleccionados en Chile · Tecnología que hospeda, experiencias que inspiran</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://wa.me/56958363333" target="_blank">Escríbeme por WhatsApp</a>
+      <a class="btn btn-ghost" href="#propiedades">Ver propiedades</a>
     </div>
-  </main>
+  </div>
+</section>
 
-  <script async src="https://www.airbnb.cl/embeddable/airbnb_jssdk"></script>
+<main>
+  <!-- Sobre mí -->
+  <section class="section" id="sobre">
+    <h2>Sobre Dream Stay Chile</h2>
+    <div class="about card">
+      <div class="avatar">
+        <img src="https://i.postimg.cc/DyXCnD4n/IMG-0260.jpg" alt="Pablo Loyola">
+      </div>
+      <div>
+        <p><strong>Dream Stay Chile</strong> es una empresa especializada en la administración de propiedades de renta corta, destacándose por el uso de inteligencia artificial y herramientas tecnológicas avanzadas para optimizar la gestión, la comunicación con los huéspedes y el posicionamiento en plataformas.</p>
+        <p>Conectamos las propiedades de nuestros clientes con huéspedes que buscan y valoran servicios de calidad, creando experiencias únicas en cada estadía. Aplicamos estrategias de precios dinámicos para encontrar el equilibrio perfecto entre precio y calidad, maximizando la rentabilidad de nuestros clientes.</p>
+        <p>Ofrecemos alojamientos con estándares de alta calidad y un servicio con enfoque hotelero, asegurando que cada estadía sea una experiencia memorable tanto para propietarios como para huéspedes.</p>
+        <p class="muted">Propiedades activas en la ciudad, la montaña, el bosque y la costa · Calificaciones sobresalientes</p>
+        <div class="contact-strip">
+          <div class="contact-item">
+            📞 <a href="tel:+56958363333">+56 9 5836 3333</a>
+          </div>
+          <div class="contact-item">
+            💬 <a href="https://wa.me/56958363333" target="_blank">WhatsApp directo</a>
+          </div>
+          <div class="contact-item">
+            ✉️ <a href="mailto:pablo.loyola@dreamstaychile.com">pablo.loyola@dreamstaychile.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Propiedades destacadas -->
+  <section class="section" id="propiedades" aria-label="Propiedades destacadas">
+    <h2>Propiedades destacadas</h2>
+    <p class="muted" style="margin-bottom:10px">Una muestra de mi catálogo. Puedes ver el listado completo en el botón de abajo.</p>
+
+    <div class="grid">
+      <!-- Card 1 -->
+<!-- Listado de propiedades -->
+<article class="prop" aria-label="Macul 1D">
+  <div class="airbnb-box">
+    <div class="airbnb-embed-frame" data-id="1327869892487118396" data-view="home" data-hide-price="true">
+      <a href="https://es-l.airbnb.com/rooms/1327869892487118396?source=embed_widget">Ver en Airbnb</a>
+    </div>
+  </div>
+  <div class="prop-body">
+    <div class="prop-title">Depto moderno en Macul</div>
+    <div class="prop-city">Macul, Santiago</div>
+    <div class="prop-actions">
+      <a class="chip chip-primary" href="https://es-l.airbnb.com/rooms/1327869892487118396" target="_blank" rel="nofollow noopener">Reservar</a>
+    </div>
+  </div>
+</article>
+
+<article class="prop" aria-label="Las Cruces Vista Mar">
+  <div class="airbnb-box">
+    <div class="airbnb-embed-frame" data-id="1342382177576530441" data-view="home" data-hide-price="true">
+      <a href="https://es-l.airbnb.com/rooms/1342382177576530441?source=embed_widget">Ver en Airbnb</a>
+    </div>
+  </div>
+  <div class="prop-body">
+    <div class="prop-title">Las Cruces Vista Mar</div>
+    <div class="prop-city">Las Cruces</div>
+    <div class="prop-actions">
+      <a class="chip chip-primary" href="https://es-l.airbnb.com/rooms/1342382177576530441" target="_blank" rel="nofollow noopener">Reservar</a>
+    </div>
+  </div>
+</article>
+
+<article class="prop" aria-label="Cabaña Laguna Verde">
+  <div class="airbnb-box">
+    <div class="airbnb-embed-frame" data-id="1309025605678101056" data-view="home" data-hide-price="true">
+      <a href="https://es-l.airbnb.com/rooms/1309025605678101056?source=embed_widget">Ver en Airbnb</a>
+    </div>
+  </div>
+  <div class="prop-body">
+    <div class="prop-title">Cabaña en Laguna Verde</div>
+    <div class="prop-city">Valparaíso</div>
+    <div class="prop-actions">
+      <a class="chip chip-primary" href="https://es-l.airbnb.com/rooms/1309025605678101056" target="_blank" rel="nofollow noopener">Reservar</a>
+    </div>
+  </div>
+</article>
+
+<article class="prop" aria-label="Cabaña San José de Maipo">
+  <div class="airbnb-box">
+    <div class="airbnb-embed-frame" data-id="1387208229861682695" data-view="home" data-hide-price="true">
+      <a href="https://es-l.airbnb.com/rooms/1387208229861682695?source=embed_widget">Ver en Airbnb</a>
+    </div>
+  </div>
+  <div class="prop-body">
+    <div class="prop-title">Cabaña en San José de Maipo</div>
+    <div class="prop-city">Cajón del Maipo</div>
+    <div class="prop-actions">
+      <a class="chip chip-primary" href="https://es-l.airbnb.com/rooms/1387208229861682695" target="_blank" rel="nofollow noopener">Reservar</a>
+    </div>
+  </div>
+</article>
+
+<article class="prop" aria-label="Providencia 1D">
+  <div class="airbnb-box">
+    <div class="airbnb-embed-frame" data-id="1353666716201755327" data-view="home" data-hide-price="true">
+      <a href="https://es-l.airbnb.com/rooms/1353666716201755327?source=embed_widget">Ver en Airbnb</a>
+    </div>
+  </div>
+  <div class="prop-body">
+    <div class="prop-title">Depto moderno en Providencia</div>
+    <div class="prop-city">Providencia, Santiago</div>
+    <div class="prop-actions">
+      <a class="chip chip-primary" href="https://es-l.airbnb.com/rooms/1353666716201755327" target="_blank" rel="nofollow noopener">Reservar</a>
+    </div>
+  </div>
+</article>
+
+<article class="prop" aria-label="La Serena Playa">
+  <div class="airbnb-box">
+    <div class="airbnb-embed-frame" data-id="1157524877445108764" data-view="home" data-hide-price="true">
+      <a href="https://es-l.airbnb.com/rooms/1157524877445108764?source=embed_widget">Ver en Airbnb</a>
+    </div>
+  </div>
+  <div class="prop-body">
+    <div class="prop-title">Depto frente al mar</div>
+    <div class="prop-city">La Serena</div>
+    <div class="prop-actions">
+      <a class="chip chip-primary" href="https://es-l.airbnb.com/rooms/1157524877445108764" target="_blank" rel="nofollow noopener">Reservar</a>
+    </div>
+  </div>
+</article>
+
+<article class="prop" aria-label="Santiago Centro 2C">
+  <div class="airbnb-box">
+    <div class="airbnb-embed-frame" data-id="1449582640394243022" data-view="home" data-hide-price="true">
+      <a href="https://es-l.airbnb.com/rooms/1449582640394243022?source=embed_widget">Ver en Airbnb</a>
+    </div>
+  </div>
+  <div class="prop-body">
+    <div class="prop-title">Depto en Santiago Centro</div>
+    <div class="prop-city">Santiago</div>
+    <div class="prop-actions">
+      <a class="chip chip-primary" href="https://es-l.airbnb.com/rooms/1449582640394243022" target="_blank" rel="nofollow noopener">Reservar</a>
+    </div>
+  </div>
+</article>
+
+<article class="prop" aria-label="La Florida 2D">
+  <div class="airbnb-box">
+    <div class="airbnb-embed-frame" data-id="1184043971058046693" data-view="home" data-hide-price="true">
+      <a href="https://es-l.airbnb.com/rooms/1184043971058046693?source=embed_widget">Ver en Airbnb</a>
+    </div>
+  </div>
+  <div class="prop-body">
+    <div class="prop-title">Depto familiar en La Florida</div>
+    <div class="prop-city">La Florida, Santiago</div>
+    <div class="prop-actions">
+      <a class="chip chip-primary" href="https://es-l.airbnb.com/rooms/1184043971058046693" target="_blank" rel="nofollow noopener">Reservar</a>
+    </div>
+  </div>
+</article>
+
+<article class="prop" aria-label="Santiago Centro 1D">
+  <div class="airbnb-box">
+    <div class="airbnb-embed-frame" data-id="1346246986058237472" data-view="home" data-hide-price="true">
+      <a href="https://es-l.airbnb.com/rooms/1346246986058237472?source=embed_widget">Ver en Airbnb</a>
+    </div>
+  </div>
+  <div class="prop-body">
+    <div class="prop-title">Depto céntrico</div>
+    <div class="prop-city">Santiago</div>
+    <div class="prop-actions">
+      <a class="chip chip-primary" href="https://es-l.airbnb.com/rooms/1346246986058237472" target="_blank" rel="nofollow noopener">Reservar</a>
+    </div>
+  </div>
+</article>
+
+<article class="prop" aria-label="Las Condes 1D">
+  <div class="airbnb-box">
+    <div class="airbnb-embed-frame" data-id="1210388349630634191" data-view="home" data-hide-price="true">
+      <a href="https://es-l.airbnb.com/rooms/1210388349630634191?source=embed_widget">Ver en Airbnb</a>
+    </div>
+  </div>
+  <div class="prop-body">
+    <div class="prop-title">Depto ejecutivo en Las Condes</div>
+    <div class="prop-city">Las Condes, Santiago</div>
+    <div class="prop-actions">
+      <a class="chip chip-primary" href="https://es-l.airbnb.com/rooms/1210388349630634191" target="_blank" rel="nofollow noopener">Reservar</a>
+    </div>
+  </div>
+</article>
+
+<article class="prop" aria-label="Ñuñoa 2D">
+  <div class="airbnb-box">
+    <div class="airbnb-embed-frame" data-id="1415933101260155691" data-view="home" data-hide-price="true">
+      <a href="https://es-l.airbnb.com/rooms/1415933101260155691?source=embed_widget">Ver en Airbnb</a>
+    </div>
+  </div>
+  <div class="prop-body">
+    <div class="prop-title">Depto amplio en Ñuñoa</div>
+    <div class="prop-city">Ñuñoa, Santiago</div>
+    <div class="prop-actions">
+      <a class="chip chip-primary" href="https://es-l.airbnb.com/rooms/1415933101260155691" target="_blank" rel="nofollow noopener">Reservar</a>
+    </div>
+  </div>
+</article>
+
+<article class="prop" aria-label="Estación Central 1D">
+  <div class="airbnb-box">
+    <div class="airbnb-embed-frame" data-id="1415950214087729957" data-view="home" data-hide-price="true">
+      <a href="https://es-l.airbnb.com/rooms/1415950214087729957?source=embed_widget">Ver en Airbnb</a>
+    </div>
+  </div>
+  <div class="prop-body">
+    <div class="prop-title">Depto en Estación Central</div>
+    <div class="prop-city">Estación Central, Santiago</div>
+    <div class="prop-actions">
+      <a class="chip chip-primary" href="https://es-l.airbnb.com/rooms/1415950214087729957" target="_blank" rel="nofollow noopener">Reservar</a>
+    </div>
+  </div>
+</article>
+    </div>
+
+    <div style="text-align:center;margin-top:16px">
+      <a class="btn btn-primary" href="https://www.dreamstaychile.com/#propiedades">Ver todas las propiedades</a>
+    </div>
+  </section>
+
+  <!-- Confianza / CTA rápido -->
+  <section class="section card" id="contacto">
+    <h2>¿Dudas o fechas especiales?</h2>
+    <p class="muted" style="margin-bottom:12px">Escríbeme directo y te ayudo a elegir la mejor opción.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://wa.me/56958363333" target="_blank">WhatsApp</a>
+      <a class="btn" style="border:1px solid var(--line)" href="mailto:pablo.loyola@dreamstaychile.com">Enviar email</a>
+      <a class="btn" style="border:1px solid var(--line)" href="tel:+56958363333">Llamar</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="foot">
+    <div class="logo">Dream Stay Chile</div>
+    <div class="copy">© <span id="year"></span> Dream Stay Chile SpA — Santiago, Chile</div>
+  </div>
+</footer>
+
+<!-- WhatsApp flotante -->
+<a class="whats" href="https://wa.me/56958363333" aria-label="WhatsApp" target="_blank">
+  <img src="https://www.dreamstaychile.com/assets/whatsapp.png" alt="WhatsApp">
+</a>
+<!-- Airbnb SDK -->
+<script async src="https://www.airbnb.cl/embeddable/airbnb_jssdk"></script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+<!-- Schema.org (mejora SEO y confianza en tarjetas) -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Organization",
+  "name":"Dream Stay Chile",
+  "url":"https://www.dreamstaychile.com/",
+  "logo":"https://i.postimg.cc/DyXCnD4n/IMG-0260.jpg",
+  "contactPoint":[{
+    "@type":"ContactPoint",
+    "telephone":"+56-9-5836-3333",
+    "contactType":"customer service",
+    "areaServed":"CL"
+  }],
+  "sameAs":["https://www.airbnb.cl/users/show/666423154"]
+}
+</script>
 </body>
 </html>
