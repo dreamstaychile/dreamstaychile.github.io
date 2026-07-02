@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dream Stay Chile · Alojamiento con confianza</title>
+<title>Dream Stay Chile · Alojamientos y administración Airbnb en Chile</title>
 
 <!-- Meta / Open Graph -->
-<meta name="description" content="Dream Stay Chile: alojamientos seleccionados en RM y litoral central. Contacto directo por WhatsApp, email o llamada.">
+<meta name="description" content="Dream Stay Chile administra y ofrece alojamientos de renta corta en Santiago, La Serena, Litoral Central e Isla de Maipo. Reservas por Airbnb o contacto directo por WhatsApp.">
 <meta property="og:title" content="Dream Stay Chile">
-<meta property="og:description" content="Alojamientos seleccionados · Contacto directo · Catálogo completo">
+<meta property="og:description" content="Alojamientos seleccionados y administración de propiedades de renta corta en Chile. Santiago, La Serena, Litoral Central e Isla de Maipo.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.dreamstaychile.com/">
 <meta property="og:image" content="https://i.postimg.cc/DyXCnD4n/IMG-0260.jpg">
@@ -37,7 +37,7 @@
     backdrop-filter:saturate(180%) blur(10px);
     border-bottom:1px solid var(--line)
   }
-  .nav{max-width:var(--max);margin:0 auto;display:flex;align-items:center;gap:16px;padding:12px}
+  .nav{max-width:var(--max);margin:0 auto;display:flex;align-items:center;gap:16px;padding:12px;flex-wrap:wrap}
 
   /* 👇 Logo + texto */
   .logo{
@@ -54,15 +54,22 @@
   .pill{border:1px solid var(--line);border-radius:999px;padding:8px 12px;text-decoration:none}
   .pill:hover{border-color:var(--ink)}
 
+  @media(max-width:720px){
+    .nav{gap:8px;justify-content:center}
+    .logo{width:100%;justify-content:center}
+    .spacer{display:none}
+    .pill{font-size:14px;padding:7px 10px}
+  }
+
   /* Hero */
   .hero{
     position:relative; min-height:98vh; display:grid; place-items:center; text-align:center; color:#fff;
-    background:url('https://www.dreamstaychile.com/assets/hero.jpg') center/cover no-repeat;
+    background:url('dreamstay-hero-collage-experiencias.png') center/cover no-repeat;
   }
-  .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,.45))}
+  .overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.48),rgba(0,0,0,.58))}
   .hero-inner{position:relative;max-width:820px;padding:24px}
-  .brandmark{font-weight:900; font-size:38px; letter-spacing:.4px}
-  .tag{margin:10px 0 20px; font-size:16px; opacity:.95}
+  .brandmark{font-weight:900; font-size:44px; letter-spacing:.4px}
+  .tag{margin:10px 0 20px; font-size:18px; line-height:1.45; opacity:.97}
   .cta-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
   .btn{display:inline-block;border-radius:12px;padding:12px 16px;font-weight:700;text-decoration:none}
   .btn-primary{background:var(--brand); color:#fff}
@@ -75,6 +82,45 @@
   h2{font-size:22px;margin:0 0 8px}
   .muted{color:var(--muted)}
   .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+
+  .lead{
+    font-size:18px;
+    line-height:1.55;
+    margin:0 0 14px;
+  }
+  .seo-grid{
+    display:grid;
+    gap:12px;
+    grid-template-columns:1fr;
+  }
+  @media(min-width:760px){ .seo-grid{grid-template-columns:repeat(3,1fr)} }
+  .mini-card{
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:14px;
+    background:#fff;
+  }
+  .mini-card h3{font-size:16px;margin:0 0 8px}
+  .mini-card p{margin:0;color:var(--muted);line-height:1.45}
+  .faq{
+    display:grid;
+    gap:10px;
+  }
+  details{
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:12px 14px;
+    background:#fff;
+  }
+  summary{
+    cursor:pointer;
+    font-weight:800;
+  }
+  details p{
+    margin:10px 0 0;
+    color:var(--muted);
+    line-height:1.5;
+  }
 
   /* About */
   .about{display:grid;gap:18px;grid-template-columns:1fr}
@@ -190,6 +236,8 @@
     </div>
     <div class="spacer"></div>
     <a class="pill" href="#propiedades">Propiedades</a>
+    <a class="pill" href="#administracion">Administración</a>
+    <a class="pill" href="#faq">FAQ</a>
     <a class="pill" href="#contacto">Contacto</a>
     <a class="pill" href="https://www.airbnb.cl/users/show/666423154" target="_blank" rel="nofollow">Perfil Airbnb</a>
   </div>
@@ -199,7 +247,7 @@
   <div class="overlay"></div>
   <div class="hero-inner">
     <div class="brandmark">Dream Stay Chile</div>
-    <p class="tag">Alojamientos seleccionados en Chile · Tecnología que hospeda, experiencias que inspiran</p>
+    <p class="tag">Alojamientos distribuidos, experiencias memorables · Tecnología que hospeda, estándar hotelero y lugares para vivir Chile</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="https://wa.me/56929542998" target="_blank">Escríbeme por WhatsApp</a>
       <a class="btn btn-ghost" href="#propiedades">Ver propiedades</a>
@@ -216,7 +264,8 @@
         <img src="https://i.postimg.cc/DyXCnD4n/IMG-0260.jpg" alt="Contacto">
       </div>
       <div>
-        <p><strong>Dream Stay Chile</strong> es una empresa especializada en la administración de propiedades de renta corta, destacándose por el uso de inteligencia artificial y herramientas tecnológicas avanzadas para optimizar la gestión, la comunicación con los huéspedes y el posicionamiento en plataformas.</p>
+        <p class="lead"><strong>Dream Stay Chile</strong> es una empresa chilena de administración de alojamientos de renta corta en Santiago, La Serena, Litoral Central e Isla de Maipo.</p>
+        <p>Nos especializamos en la administración de propiedades de renta corta, destacándonos por el uso de inteligencia artificial y herramientas tecnológicas avanzadas para optimizar la gestión, la comunicación con los huéspedes y el posicionamiento en plataformas como Airbnb.</p>
         <p>Conectamos las propiedades de nuestros clientes con huéspedes que buscan y valoran servicios de calidad, creando experiencias únicas en cada estadía. Aplicamos estrategias de precios dinámicos para encontrar el equilibrio perfecto entre precio y calidad, maximizando la rentabilidad de nuestros clientes.</p>
         <p>Ofrecemos alojamientos con estándares de alta calidad y un servicio con enfoque hotelero, asegurando que cada estadía sea una experiencia memorable tanto para propietarios como para huéspedes.</p>
         <p class="muted">Propiedades activas en la ciudad, la montaña, el bosque y la costa · Calificaciones sobresalientes</p>
@@ -232,6 +281,35 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="section" id="zonas">
+    <h2>Alojamientos por zona en Chile</h2>
+    <p class="muted" style="margin-bottom:12px">Dream Stay Chile conecta huéspedes con alojamientos seleccionados y ayuda a propietarios a rentabilizar sus espacios con gestión profesional.</p>
+    <div class="seo-grid">
+      <div class="mini-card">
+        <h3>Santiago</h3>
+        <p>Alojamientos temporales en Macul, La Florida, Ñuñoa, Santiago Centro e Isla de Maipo, con opciones para viajes de trabajo, familia y estadías urbanas.</p>
+      </div>
+      <div class="mini-card">
+        <h3>La Serena</h3>
+        <p>Departamentos seleccionados para estadías cerca de la playa, con foco en comodidad, ubicación y contacto directo para resolver dudas antes de reservar.</p>
+      </div>
+      <div class="mini-card">
+        <h3>Litoral Central</h3>
+        <p>Propiedades en Las Cruces, El Tabo, Laguna Verde y Valparaíso para escapadas de descanso, vacaciones y experiencias cerca del mar o la naturaleza.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section card" id="administracion">
+    <h2>Administración de propiedades de renta corta</h2>
+    <p><strong>Dream Stay Chile administra propiedades para arriendo temporal y Airbnb</strong>, combinando atención personalizada, precios dinámicos, tecnología, comunicación con huéspedes y enfoque hotelero.</p>
+    <p class="muted">Si tienes una propiedad con potencial para renta corta, puedes postularla para evaluación. Revisamos ubicación, estándar, equipamiento y oportunidades de posicionamiento antes de integrarla al catálogo.</p>
+    <div class="cta-row" style="justify-content:flex-start">
+      <a class="btn btn-primary" href="https://wa.me/56929542998" target="_blank">Postular mi propiedad</a>
+      <a class="btn" style="border:1px solid var(--line)" href="mailto:contacto@dreamstaychile.com">Escribir por email</a>
     </div>
   </section>
 
@@ -602,6 +680,32 @@
     </div>
   </section>
 
+  <section class="section" id="faq">
+    <h2>Preguntas frecuentes sobre Dream Stay Chile</h2>
+    <div class="faq">
+      <details>
+        <summary>¿Qué es Dream Stay Chile?</summary>
+        <p>Dream Stay Chile es una empresa chilena dedicada a alojamientos de renta corta y administración de propiedades para Airbnb y estadías temporales.</p>
+      </details>
+      <details>
+        <summary>¿Dónde tiene alojamientos Dream Stay Chile?</summary>
+        <p>Contamos con alojamientos en Santiago, Macul, La Florida, Ñuñoa, Santiago Centro, Isla de Maipo, La Serena, Las Cruces, El Tabo, Laguna Verde y Valparaíso.</p>
+      </details>
+      <details>
+        <summary>¿Cómo puedo reservar un alojamiento?</summary>
+        <p>Puedes reservar desde los enlaces de Airbnb de cada propiedad o contactar directamente por WhatsApp para recibir orientación sobre fechas, zonas y disponibilidad.</p>
+      </details>
+      <details>
+        <summary>¿Dream Stay Chile administra propiedades de terceros?</summary>
+        <p>Sí. Administramos propiedades de renta corta con apoyo de tecnología, precios dinámicos, comunicación con huéspedes y una operación orientada a estándares hoteleros.</p>
+      </details>
+      <details>
+        <summary>¿Cómo contacto a Dream Stay Chile?</summary>
+        <p>Puedes escribir por WhatsApp al +56 9 2954 2998, enviar un email a contacto@dreamstaychile.com o llamar directamente desde este sitio.</p>
+      </details>
+    </div>
+  </section>
+
   <!-- Confianza / CTA rápido -->
   <section class="section card" id="contacto">
     <h2>¿Dudas o fechas especiales?</h2>
@@ -639,17 +743,102 @@
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
-  "@type":"Organization",
-  "name":"Dream Stay Chile",
-  "url":"https://www.dreamstaychile.com/",
-  "logo":"https://www.dreamstaychile.com/assets/logo-coral.png",
-  "contactPoint":[{
-    "@type":"ContactPoint",
-    "telephone":"+56-9-2954-2998",
-    "contactType":"customer service",
-    "areaServed":"CL"
-  }],
-  "sameAs":["https://www.airbnb.cl/users/show/666423154"]
+  "@graph":[
+    {
+      "@type":["Organization","LocalBusiness","LodgingBusiness"],
+      "@id":"https://www.dreamstaychile.com/#organization",
+      "name":"Dream Stay Chile",
+      "legalName":"Dream Stay Chile SpA",
+      "url":"https://www.dreamstaychile.com/",
+      "logo":"https://www.dreamstaychile.com/assets/logo-coral.png",
+      "image":"https://i.postimg.cc/DyXCnD4n/IMG-0260.jpg",
+      "description":"Dream Stay Chile administra y ofrece alojamientos de renta corta en Santiago, La Serena, Litoral Central e Isla de Maipo.",
+      "telephone":"+56-9-2954-2998",
+      "email":"contacto@dreamstaychile.com",
+      "address":{
+        "@type":"PostalAddress",
+        "addressLocality":"Santiago",
+        "addressCountry":"CL"
+      },
+      "areaServed":[
+        {"@type":"City","name":"Santiago"},
+        {"@type":"Place","name":"Macul"},
+        {"@type":"Place","name":"La Florida"},
+        {"@type":"Place","name":"Ñuñoa"},
+        {"@type":"Place","name":"Santiago Centro"},
+        {"@type":"Place","name":"Isla de Maipo"},
+        {"@type":"City","name":"La Serena"},
+        {"@type":"Place","name":"Litoral Central"},
+        {"@type":"Place","name":"Las Cruces"},
+        {"@type":"Place","name":"El Tabo"},
+        {"@type":"Place","name":"Laguna Verde"},
+        {"@type":"City","name":"Valparaíso"}
+      ],
+      "contactPoint":[{
+        "@type":"ContactPoint",
+        "telephone":"+56-9-2954-2998",
+        "contactType":"customer service",
+        "areaServed":"CL",
+        "availableLanguage":["es"]
+      }],
+      "sameAs":["https://www.airbnb.cl/users/show/666423154"]
+    },
+    {
+      "@type":"Service",
+      "@id":"https://www.dreamstaychile.com/#administracion-renta-corta",
+      "name":"Administración de propiedades de renta corta",
+      "provider":{"@id":"https://www.dreamstaychile.com/#organization"},
+      "areaServed":"Chile",
+      "serviceType":"Administración Airbnb y alojamientos temporales",
+      "description":"Gestión de propiedades de renta corta con precios dinámicos, comunicación con huéspedes, tecnología y enfoque hotelero."
+    },
+    {
+      "@type":"FAQPage",
+      "@id":"https://www.dreamstaychile.com/#faq",
+      "mainEntity":[
+        {
+          "@type":"Question",
+          "name":"¿Qué es Dream Stay Chile?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Dream Stay Chile es una empresa chilena dedicada a alojamientos de renta corta y administración de propiedades para Airbnb y estadías temporales."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"¿Dónde tiene alojamientos Dream Stay Chile?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Dream Stay Chile cuenta con alojamientos en Santiago, Macul, La Florida, Ñuñoa, Santiago Centro, Isla de Maipo, La Serena, Las Cruces, El Tabo, Laguna Verde y Valparaíso."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"¿Cómo puedo reservar un alojamiento?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Puedes reservar desde los enlaces de Airbnb de cada propiedad o contactar directamente por WhatsApp para recibir orientación sobre fechas, zonas y disponibilidad."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"¿Dream Stay Chile administra propiedades de terceros?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Sí. Dream Stay Chile administra propiedades de renta corta con apoyo de tecnología, precios dinámicos, comunicación con huéspedes y una operación orientada a estándares hoteleros."
+          }
+        },
+        {
+          "@type":"Question",
+          "name":"¿Cómo contacto a Dream Stay Chile?",
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Puedes escribir por WhatsApp al +56 9 2954 2998, enviar un email a contacto@dreamstaychile.com o llamar directamente desde el sitio."
+          }
+        }
+      ]
+    }
+  ]
 }
 </script>
 </body>
