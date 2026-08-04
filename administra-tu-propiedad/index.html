@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Administración de Airbnb y Booking | Dream Stay Chile</title>
+  <meta name="description" content="Descubre si tu propiedad califica para ser administrada por Dream Stay Chile. Optimizamos precios, reservas, atención de huéspedes y operación en Airbnb y Booking.">
+  <link rel="canonical" href="https://www.dreamstaychile.com/administra-tu-propiedad/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Administración de Airbnb y Booking | Dream Stay Chile">
+  <meta property="og:description" content="Evalúa tu propiedad para una administración profesional de renta corta.">
+  <meta property="og:url" content="https://www.dreamstaychile.com/administra-tu-propiedad/">
+  <meta property="og:image" content="https://www.dreamstaychile.com/assets/dreamstay-hero-collage-experiencias.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../assets/logo-coral.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../" aria-label="Volver a Dream Stay Chile">
+      <img src="../assets/logo-coral.png" alt="" width="40" height="40">
+      <span>Dream Stay Chile</span>
+    </a>
+    <a class="header-link" href="#evaluacion">Evaluar mi propiedad</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <p class="eyebrow">Administración de renta corta</p>
+        <h1>Administración profesional de propiedades para Airbnb y Booking</h1>
+        <p class="hero-lead">Haz que tu propiedad genere más, sin tener que administrarla tú.</p>
+        <p>Gestionamos precios, reservas, huéspedes y operación. Completa esta evaluación y descubre si tu propiedad califica para ser administrada por Dream Stay Chile.</p>
+        <a class="button button-primary track-cta" href="#evaluacion">Evaluar mi propiedad</a>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="beneficios-title">
+      <div class="section-heading">
+        <p class="eyebrow">Menos carga, mejor gestión</p>
+        <h2 id="beneficios-title">Nos ocupamos de la operación completa</h2>
+      </div>
+      <div class="benefit-grid">
+        <article><span aria-hidden="true">↗</span><h3>Precios dinámicos</h3><p>Optimizamos las tarifas según demanda, temporada y comportamiento del mercado.</p></article>
+        <article><span aria-hidden="true">⌂</span><h3>Airbnb y Booking</h3><p>Administramos y optimizamos la presencia de tu propiedad en las principales plataformas.</p></article>
+        <article><span aria-hidden="true">◌</span><h3>Atención de huéspedes</h3><p>Gestionamos consultas, reservas y comunicación durante cada estadía.</p></article>
+        <article><span aria-hidden="true">✓</span><h3>Limpieza y operación</h3><p>Coordinamos la preparación del alojamiento y las tareas operativas necesarias.</p></article>
+        <article><span aria-hidden="true">★</span><h3>Anuncios optimizados</h3><p>Mejoramos contenido y posicionamiento para presentar la propiedad de forma competitiva.</p></article>
+        <article><span aria-hidden="true">▥</span><h3>Información clara</h3><p>Mantienes visibilidad sobre reservas e ingresos, con una gestión profesional.</p></article>
+      </div>
+    </section>
+
+    <section class="form-section" id="evaluacion" aria-labelledby="form-title">
+      <div class="form-intro">
+        <p class="eyebrow">Evaluación sin costo</p>
+        <h2 id="form-title">Cuéntanos sobre tu propiedad</h2>
+        <p>Te tomará cerca de cuatro minutos. Tus respuestas nos ayudarán a preparar un contacto más útil.</p>
+      </div>
+
+      <div class="form-card">
+        <div class="progress-wrap" aria-live="polite">
+          <div class="progress-copy"><strong id="progress-label">Paso 1 de 4</strong><span id="progress-name">La propiedad</span></div>
+          <div class="progress" role="progressbar" aria-valuemin="1" aria-valuemax="4" aria-valuenow="1" aria-labelledby="progress-label"><span id="progress-bar"></span></div>
+        </div>
+
+        <form id="property-form" novalidate>
+          <div class="form-alert" id="form-alert" role="alert" hidden></div>
+          <input class="honeypot" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <fieldset class="form-step" data-step="1">
+            <legend>Información de la propiedad</legend>
+            <div class="field field-wide">
+              <label for="location">Ubicación de la propiedad</label>
+              <select id="location" name="location" required>
+                <option value="">Selecciona una opción</option><option value="papudo">Papudo</option><option value="zapallar">Zapallar</option><option value="cachagua">Cachagua</option><option value="maitencillo">Maitencillo</option><option value="lo-barnechea">Lo Barnechea</option><option value="las-condes">Las Condes</option><option value="vitacura">Vitacura</option><option value="providencia">Providencia</option><option value="nunoa">Ñuñoa</option><option value="vina-renaca-concon">Viña del Mar / Reñaca / Concón</option><option value="pucon">Pucón</option><option value="otra">Otra ubicación</option>
+              </select><span class="error" id="location-error"></span>
+            </div>
+            <div class="field field-wide conditional" id="other-location-wrap" hidden>
+              <label for="otherLocation">Indica la comuna o localidad</label><input id="otherLocation" name="otherLocation" maxlength="80"><span class="error" id="otherLocation-error"></span>
+            </div>
+            <div class="field field-wide"><label for="address">Dirección de la propiedad</label><input id="address" name="address" placeholder="Ejemplo: Apoquindo 1935" maxlength="160" autocomplete="street-address" required><small>No mostraremos la dirección públicamente ni la usaremos en mapas sin tu consentimiento.</small><span class="error" id="address-error"></span></div>
+            <div class="field"><label for="propertyType">¿Qué tipo de propiedad es?</label><select id="propertyType" name="propertyType" required><option value="">Selecciona</option><option value="departamento">Departamento</option><option value="casa">Casa</option><option value="cabana">Cabaña</option><option value="loft">Loft</option><option value="estudio">Estudio</option><option value="otro">Otro</option></select><span class="error" id="propertyType-error"></span></div>
+            <div class="field conditional" id="other-type-wrap" hidden><label for="otherPropertyType">Especifica el tipo (opcional)</label><input id="otherPropertyType" name="otherPropertyType" maxlength="60"></div>
+            <div class="field"><label for="bedrooms">Número de dormitorios</label><select id="bedrooms" name="bedrooms" required><option value="">Selecciona</option><option value="0">0 - Estudio</option><option>1</option><option>2</option><option>3</option><option>4</option><option value="5+">5 o más</option></select><span class="error" id="bedrooms-error"></span></div>
+            <div class="field"><label for="bathrooms">Número de baños</label><select id="bathrooms" name="bathrooms" required><option value="">Selecciona</option><option>1</option><option>2</option><option>3</option><option>4</option><option value="5+">5 o más</option></select><span class="error" id="bathrooms-error"></span></div>
+            <div class="field"><label for="guestCapacity">¿Cuántos huéspedes puede alojar?</label><select id="guestCapacity" name="guestCapacity" required><option value="">Selecciona</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option value="10+">10 o más</option></select><span class="error" id="guestCapacity-error"></span></div>
+          </fieldset>
+
+          <fieldset class="form-step" data-step="2" hidden>
+            <legend>Situación comercial</legend>
+            <div class="field field-wide"><label for="currentSituation">¿Cuál es la situación actual de la propiedad?</label><select id="currentSituation" name="currentSituation" required><option value="">Selecciona</option><option value="available">Está disponible y sin uso</option><option value="occasional">La utilizo ocasionalmente</option><option value="long-term-rental">Está arrendada actualmente</option><option value="short-term-rental">Ya funciona como renta corta</option><option value="implementation">Está en proceso de compra o implementación</option></select><span class="error" id="currentSituation-error"></span></div>
+            <div class="field field-wide"><span class="label">¿Actualmente está publicada en alguna plataforma?</span><div class="check-grid" data-exclusive="none"><label><input type="checkbox" name="platforms" value="airbnb"> Airbnb</label><label><input type="checkbox" name="platforms" value="booking"> Booking</label><label><input type="checkbox" name="platforms" value="other"> Otra plataforma</label><label><input type="checkbox" name="platforms" value="none"> No está publicada</label></div></div>
+            <div class="field field-wide conditional" id="other-platform-wrap" hidden><label for="otherPlatform">¿Cuál otra plataforma?</label><input id="otherPlatform" name="otherPlatform" maxlength="80"></div>
+            <div class="field"><label for="primaryGoal">¿Cuál es tu principal objetivo?</label><select id="primaryGoal" name="primaryGoal" required><option value="">Selecciona</option><option>Aumentar los ingresos de la propiedad</option><option>Delegar la administración completa</option><option>Mejorar la ocupación</option><option>Mejorar el precio promedio por noche</option><option>Dejar de atender personalmente a los huéspedes</option><option>Profesionalizar la operación</option><option>Evaluar si la renta corta es conveniente</option><option>Otro</option></select><span class="error" id="primaryGoal-error"></span></div>
+            <div class="field"><label for="currentProblem">¿Cuál es hoy tu principal dificultad?</label><select id="currentProblem" name="currentProblem"><option value="">Selecciona</option><option>No tengo tiempo para administrar</option><option>Tengo pocas reservas</option><option>Los precios no están optimizados</option><option>La operación y limpieza son difíciles de coordinar</option><option>La atención de huéspedes consume demasiado tiempo</option><option>No sé cómo comenzar</option><option>No tengo dificultades, solo quiero evaluar alternativas</option><option>Otro</option></select></div>
+            <div class="field field-wide"><label for="propertyCount">¿Cuántas propiedades deseas administrar o evaluar?</label><select id="propertyCount" name="propertyCount" required><option value="">Selecciona</option><option value="1">1 propiedad</option><option value="2-3">2 a 3 propiedades</option><option value="4-10">4 a 10 propiedades</option><option value="more-than-10">Más de 10 propiedades</option></select><span class="error" id="propertyCount-error"></span></div>
+            <div class="field field-wide"><span class="label">¿Qué esperas obtener de una empresa administradora?</span><div class="check-grid"><label><input type="checkbox" name="expectations" value="profitability"> Mayor rentabilidad</label><label><input type="checkbox" name="expectations" value="occupancy"> Más ocupación</label><label><input type="checkbox" name="expectations" value="less-operation"> Menos carga operativa</label><label><input type="checkbox" name="expectations" value="guest-service"> Atención profesional de huéspedes</label><label><input type="checkbox" name="expectations" value="transparency"> Transparencia en reservas e ingresos</label><label><input type="checkbox" name="expectations" value="maintenance"> Mantenimiento y cuidado</label><label><input type="checkbox" name="expectations" value="optimization"> Optimización en Airbnb y Booking</label></div></div>
+          </fieldset>
+
+          <fieldset class="form-step" data-step="3" hidden>
+            <legend>Equipamiento y disponibilidad</legend>
+            <div class="field"><label for="furnishedStatus">¿La propiedad está amoblada?</label><select id="furnishedStatus" name="furnishedStatus" required><option value="">Selecciona</option><option value="complete">Sí, completamente</option><option value="partial">Parcialmente</option><option value="no">No</option><option value="implementation">Está en proceso de implementación</option></select><span class="error" id="furnishedStatus-error"></span></div>
+            <div class="field"><label for="parking">¿Cuenta con estacionamiento?</label><select id="parking" name="parking"><option value="">Selecciona</option><option value="private">Sí, privado</option><option value="shared">Sí, compartido o sujeto a disponibilidad</option><option value="no">No</option></select></div>
+            <div class="field"><label for="internet">¿La propiedad cuenta con internet instalado?</label><select id="internet" name="internet" required><option value="">Selecciona</option><option value="yes">Sí</option><option value="no">No</option><option value="installation">Está en proceso de instalación</option></select><span class="error" id="internet-error"></span></div>
+            <div class="field"><label for="laundry">¿Cuenta con lavadora o lavandería?</label><select id="laundry" name="laundry" required><option value="">Selecciona</option><option value="inside">Lavadora dentro de la propiedad</option><option value="building">Lavandería en el edificio o condominio</option><option value="both">Cuenta con ambas alternativas</option><option value="none">No cuenta con ninguna</option><option value="unknown">No estoy seguro</option></select><span class="error" id="laundry-error"></span></div>
+            <div class="field field-wide"><label for="startTime">¿Cuándo te gustaría comenzar?</label><select id="startTime" name="startTime" required><option value="">Selecciona</option><option value="immediate">Lo antes posible</option><option value="within-30-days">Dentro de 30 días</option><option value="one-to-three-months">Dentro de 1 a 3 meses</option><option value="more-than-three-months">En más de 3 meses</option><option value="evaluating">Solo estoy evaluando</option></select><span class="error" id="startTime-error"></span></div>
+            <div class="field field-wide upload-placeholder"><span class="label">Fotografías de la propiedad (opcional)</span><p>La carga de fotografías estará disponible cuando conectemos el almacenamiento seguro. Podrás enviar tu evaluación sin adjuntarlas.</p></div>
+          </fieldset>
+
+          <fieldset class="form-step" data-step="4" hidden>
+            <legend>Datos de contacto</legend>
+            <div class="field"><label for="fullName">Nombre y apellido</label><input id="fullName" name="fullName" autocomplete="name" maxlength="120" required><span class="error" id="fullName-error"></span></div>
+            <div class="field"><label for="email">Correo electrónico</label><input id="email" name="email" type="email" autocomplete="email" maxlength="160" required><span class="error" id="email-error"></span></div>
+            <div class="field"><label for="whatsapp">WhatsApp</label><input id="whatsapp" name="whatsapp" type="tel" autocomplete="tel" inputmode="tel" placeholder="Ejemplo: +56912345678" maxlength="24" required><small>Incluye el signo + y el código de país.</small><span class="error" id="whatsapp-error"></span></div>
+            <div class="field"><label for="preferredContactTime">¿Cuál es el mejor horario para contactarte?</label><select id="preferredContactTime" name="preferredContactTime"><option value="">Selecciona</option><option>Mañana</option><option>Tarde</option><option>Después de las 18:00</option><option>Cualquier horario</option><option>Prefiero contacto por WhatsApp</option><option>Prefiero contacto por correo</option></select></div>
+            <div class="field field-wide"><label for="comments">¿Hay algo más que debamos saber?</label><textarea id="comments" name="comments" rows="4" maxlength="500"></textarea><small><span id="comment-count">0</span>/500 caracteres</small></div>
+            <div class="field field-wide consent"><label><input id="privacyConsent" name="privacyConsent" type="checkbox" required> <span>Acepto que Dream Stay Chile utilice mis datos para contactarme y evaluar la administración de mi propiedad. <a href="../politica-de-privacidad.html" target="_blank">Política de privacidad</a>.</span></label><span class="error" id="privacyConsent-error"></span></div>
+            <div class="field field-wide consent"><label><input name="marketingConsent" type="checkbox"> <span>Acepto recibir información comercial y novedades de Dream Stay Chile.</span></label></div>
+          </fieldset>
+
+          <div class="form-navigation"><button class="button button-secondary" type="button" id="back" hidden>Volver</button><button class="button button-primary" type="button" id="next">Continuar</button><button class="button button-primary" type="submit" id="submit" hidden>Solicitar evaluación</button></div>
+        </form>
+
+        <div class="success" id="success" hidden tabindex="-1"><span class="success-icon" aria-hidden="true">✓</span><h2>Recibimos la información de tu propiedad</h2><p>Nuestro equipo revisará los antecedentes y se pondrá en contacto contigo para evaluar el potencial de administración.</p><a class="button button-secondary" href="../">Conocer más sobre Dream Stay Chile</a></div>
+      </div>
+    </section>
+
+    <section class="section"><div class="section-heading"><p class="eyebrow">Simple y acompañado</p><h2>Cómo funciona</h2></div><ol class="process"><li><strong>Completas la evaluación</strong><span>Nos entregas la información principal.</span></li><li><strong>Analizamos la propiedad</strong><span>Revisamos ubicación, estándar y potencial.</span></li><li><strong>Nos comunicamos contigo</strong><span>Resolvemos dudas y conocemos tus objetivos.</span></li><li><strong>Definimos la propuesta</strong><span>Acordamos alcance y condiciones.</span></li><li><strong>Preparamos la propiedad</strong><span>Optimizamos presentación y operación.</span></li><li><strong>Comenzamos la administración</strong><span>Activamos la gestión profesional.</span></li></ol></section>
+
+    <section class="section services"><div><p class="eyebrow">Servicio integral</p><h2>Una gestión pensada para propietarios que valoran su tiempo</h2><p>Combinamos tecnología, hospitalidad y seguimiento operativo para cuidar el alojamiento y la experiencia del huésped.</p></div><ul><li>Estrategia y actualización de precios</li><li>Optimización de anuncios</li><li>Gestión de reservas y calendarios</li><li>Comunicación con huéspedes</li><li>Coordinación de limpieza</li><li>Seguimiento de la operación</li></ul></section>
+
+    <section class="section faq" aria-labelledby="faq-title"><div class="section-heading"><p class="eyebrow">Preguntas frecuentes</p><h2 id="faq-title">Antes de comenzar</h2></div>
+      <details><summary>¿Qué servicios incluye la administración?</summary><p>Incluye estrategia de precios, gestión de anuncios y reservas, comunicación con huéspedes y coordinación de la operación, según la propuesta acordada.</p></details>
+      <details><summary>¿Dream Stay Chile administra Airbnb y Booking?</summary><p>Sí. Trabajamos la presencia y operación de propiedades en ambas plataformas.</p></details>
+      <details><summary>¿Cómo se definen los precios?</summary><p>Se analizan demanda, temporada, eventos, competencia, características y desempeño de la propiedad.</p></details>
+      <details><summary>¿Quién se comunica con los huéspedes?</summary><p>Nuestro equipo gestiona las consultas y la comunicación asociada a la estadía.</p></details>
+      <details><summary>¿Cómo se coordinan las limpiezas?</summary><p>La coordinación se integra a la operación entre reservas para preparar la propiedad para cada llegada.</p></details>
+      <details><summary>¿Puedo mantener bloqueadas algunas fechas?</summary><p>Sí. Las condiciones de uso personal y el manejo del calendario se acuerdan antes de iniciar.</p></details>
+      <details><summary>¿Qué requisitos debe cumplir la propiedad?</summary><p>Evaluamos ubicación, estado, equipamiento, seguridad y potencial comercial. Completar el formulario no obliga a contratar el servicio.</p></details>
+      <details><summary>¿Cómo recibo información sobre reservas e ingresos?</summary><p>La forma y frecuencia del seguimiento se especifican en la propuesta de administración.</p></details>
+      <details><summary>¿Dream Stay Chile garantiza una rentabilidad determinada?</summary><p>No se garantiza una rentabilidad específica. Los resultados dependen de ubicación, características, demanda, temporada, precio, reputación y disponibilidad.</p></details>
+    </section>
+
+    <section class="final-cta"><div><p class="eyebrow">Da el primer paso</p><h2>Descubre si tu propiedad tiene potencial para nuestro modelo</h2><p>Completa una evaluación breve y conversemos sobre tus objetivos.</p></div><a class="button button-primary track-cta" href="#evaluacion">Quiero saber cuánto podría generar</a></section>
+  </main>
+
+  <footer><a class="brand" href="../"><img src="../assets/logo-coral.png" alt="" width="36" height="36"><span>Dream Stay Chile</span></a><p>© <span id="year"></span> Dream Stay Chile SpA</p></footer>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Administración de propiedades para Airbnb y Booking","provider":{"@type":"Organization","name":"Dream Stay Chile","url":"https://www.dreamstaychile.com/"},"areaServed":"Chile","url":"https://www.dreamstaychile.com/administra-tu-propiedad/"}</script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
