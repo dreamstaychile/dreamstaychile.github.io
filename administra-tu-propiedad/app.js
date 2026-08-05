@@ -8,8 +8,8 @@
   const submitButton = document.querySelector('#submit');
   const alertBox = document.querySelector('#form-alert');
   const success = document.querySelector('#success');
-  const storageKey = 'dreamstay-property-lead-v1';
-  const stepNames = ['La propiedad', 'Situación comercial', 'Equipamiento', 'Tus datos'];
+  const storageKey = 'dreamstay-property-lead-v2';
+  const stepNames = ['Propiedad y equipamiento', 'Contacto'];
   let currentStep = 1;
   let started = false;
 
@@ -29,20 +29,20 @@
     currentStep = step;
     steps.forEach(item => { item.hidden = Number(item.dataset.step) !== step; });
     backButton.hidden = step === 1;
-    nextButton.hidden = step === 4;
-    submitButton.hidden = step !== 4;
-    document.querySelector('#progress-label').textContent = `Paso ${step} de 4`;
+    nextButton.hidden = step === 2;
+    submitButton.hidden = step !== 2;
+    document.querySelector('#progress-label').textContent = `Paso ${step} de 2`;
     document.querySelector('#progress-name').textContent = stepNames[step - 1];
     const progress = document.querySelector('.progress');
     progress.setAttribute('aria-valuenow', String(step));
-    document.querySelector('#progress-bar').style.width = `${step * 25}%`;
+    document.querySelector('#progress-bar').style.width = `${step * 50}%`;
     alertBox.hidden = true;
     steps[step - 1].querySelector('legend')?.focus?.();
     document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   const messages = {
-    location: 'Selecciona la ubicación de la propiedad.', otherLocation: 'Indica la comuna o localidad.', address: 'Ingresa la dirección de la propiedad.', propertyType: 'Selecciona el tipo de propiedad.', bedrooms: 'Selecciona el número de dormitorios.', bathrooms: 'Selecciona el número de baños.', guestCapacity: 'Selecciona la capacidad de huéspedes.', currentSituation: 'Selecciona la situación actual.', primaryGoal: 'Selecciona tu objetivo principal.', propertyCount: 'Selecciona la cantidad de propiedades.', furnishedStatus: 'Selecciona el estado de amoblado.', pool: 'Selecciona si la propiedad cuenta con piscina.', laundry: 'Selecciona una alternativa de lavadora o lavandería.', startTime: 'Selecciona cuándo te gustaría comenzar.', fullName: 'Ingresa tu nombre y apellido.', email: 'Ingresa un correo electrónico válido.', whatsapp: 'Ingresa tu número con signo + y código de país.', privacyConsent: 'Debes aceptar el uso de tus datos para continuar.'
+    location: 'Selecciona la ubicación de la propiedad.', otherLocation: 'Indica la comuna o localidad.', address: 'Ingresa la dirección de la propiedad.', propertyType: 'Selecciona el tipo de propiedad.', otherPropertyType: 'Indica qué tipo de propiedad es.', bedrooms: 'Selecciona el número de dormitorios.', otherPlatform: 'Indica cuál es la otra plataforma.', furnishedStatus: 'Selecciona el estado de amoblado.', parking: 'Selecciona una opción de estacionamiento.', pool: 'Selecciona si la propiedad cuenta con piscina.', laundry: 'Selecciona una alternativa de lavadora o lavandería.', startTime: 'Selecciona cuándo te gustaría comenzar.', fullName: 'Ingresa tu nombre y apellido.', email: 'Ingresa un correo electrónico válido.', whatsapp: 'Ingresa tu número con signo + y código de país.', privacyConsent: 'Debes aceptar el uso de tus datos para continuar.'
   };
 
   const validateField = field => {
@@ -58,10 +58,17 @@
   };
 
   const validateStep = step => {
-    if (form.location.value === 'otra') form.otherLocation.required = true;
-    else form.otherLocation.required = false;
+    form.otherLocation.required = form.location.value === 'otra';
+    form.otherPropertyType.required = form.propertyType.value === 'otro';
+    const selectedPlatforms = [...form.querySelectorAll('[name="platforms"]:checked')];
+    form.otherPlatform.required = selectedPlatforms.some(item => item.value === 'other');
     const fields = [...steps[step - 1].querySelectorAll('[required]')];
-    const valid = fields.map(validateField).every(Boolean);
+    let valid = fields.map(validateField).every(Boolean);
+    if (step === 1) {
+      const platformsError = document.querySelector('#platforms-error');
+      platformsError.textContent = selectedPlatforms.length ? '' : 'Selecciona al menos una opción.';
+      valid = selectedPlatforms.length > 0 && valid;
+    }
     if (!valid) {
       alertBox.textContent = 'Revisa los campos señalados antes de continuar.';
       alertBox.hidden = false;
@@ -76,7 +83,7 @@
     const data = new FormData(form);
     const result = {};
     for (const [key, value] of data.entries()) {
-      if (['platforms', 'expectations'].includes(key)) (result[key] ||= []).push(value);
+      if (key === 'platforms') (result[key] ||= []).push(value);
       else result[key] = value;
     }
     result.privacyConsent = form.privacyConsent.checked;
@@ -122,6 +129,7 @@
   form.addEventListener('change', event => {
     if (event.target.name === 'platforms' && event.target.value === 'none' && event.target.checked) form.querySelectorAll('[name="platforms"]:not([value="none"])').forEach(item => { item.checked = false; });
     if (event.target.name === 'platforms' && event.target.value !== 'none' && event.target.checked) form.querySelector('[name="platforms"][value="none"]').checked = false;
+    if (event.target.name === 'platforms') document.querySelector('#platforms-error').textContent = '';
     toggleConditionals(); persist();
   });
 
@@ -134,9 +142,9 @@
 
   form.addEventListener('submit', async event => {
     event.preventDefault();
-    if (!validateStep(4)) return;
+    if (!validateStep(2)) return;
     if (form.website.value) return;
-    analytics('property_form_step_4_completed', { form_step: 4 });
+    analytics('property_form_step_2_completed', { form_step: 2 });
     analytics('property_form_submitted');
     const endpoint = window.DREAM_STAY_LEADS_ENDPOINT;
     if (!endpoint) {
