@@ -54,13 +54,13 @@
       <div class="form-intro">
         <p class="eyebrow">Evaluación sin costo</p>
         <h2 id="form-title">Cuéntanos sobre tu propiedad</h2>
-        <p>Te tomará cerca de cuatro minutos. Tus respuestas nos ayudarán a preparar un contacto más útil.</p>
+        <p>Te tomará cerca de dos minutos. Tus respuestas nos ayudarán a preparar un contacto más útil.</p>
       </div>
 
       <div class="form-card">
         <div class="progress-wrap" aria-live="polite">
-          <div class="progress-copy"><strong id="progress-label">Paso 1 de 4</strong><span id="progress-name">La propiedad</span></div>
-          <div class="progress" role="progressbar" aria-valuemin="1" aria-valuemax="4" aria-valuenow="1" aria-labelledby="progress-label"><span id="progress-bar"></span></div>
+          <div class="progress-copy"><strong id="progress-label">Paso 1 de 2</strong><span id="progress-name">Propiedad y equipamiento</span></div>
+          <div class="progress" role="progressbar" aria-valuemin="1" aria-valuemax="2" aria-valuenow="1" aria-labelledby="progress-label"><span id="progress-bar"></span></div>
         </div>
 
         <form id="property-form" novalidate>
@@ -68,7 +68,7 @@
           <input class="honeypot" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
 
           <fieldset class="form-step" data-step="1">
-            <legend>Información de la propiedad</legend>
+            <legend>La propiedad</legend>
             <div class="field field-wide">
               <label for="location">Ubicación de la propiedad</label>
               <select id="location" name="location" required>
@@ -80,35 +80,19 @@
             </div>
             <div class="field field-wide"><label for="address">Dirección de la propiedad</label><input id="address" name="address" placeholder="Ejemplo: Apoquindo 1935" maxlength="160" autocomplete="street-address" required><small>No mostraremos la dirección públicamente ni la usaremos en mapas sin tu consentimiento.</small><span class="error" id="address-error"></span></div>
             <div class="field"><label for="propertyType">¿Qué tipo de propiedad es?</label><select id="propertyType" name="propertyType" required><option value="">Selecciona</option><option value="departamento">Departamento</option><option value="casa">Casa</option><option value="cabana">Cabaña</option><option value="loft">Loft</option><option value="estudio">Estudio</option><option value="otro">Otro</option></select><span class="error" id="propertyType-error"></span></div>
-            <div class="field conditional" id="other-type-wrap" hidden><label for="otherPropertyType">Especifica el tipo (opcional)</label><input id="otherPropertyType" name="otherPropertyType" maxlength="60"></div>
+            <div class="field conditional" id="other-type-wrap" hidden><label for="otherPropertyType">¿Qué tipo de propiedad es?</label><input id="otherPropertyType" name="otherPropertyType" maxlength="60"><span class="error" id="otherPropertyType-error"></span></div>
             <div class="field"><label for="bedrooms">Número de dormitorios</label><select id="bedrooms" name="bedrooms" required><option value="">Selecciona</option><option value="0">0 - Estudio</option><option>1</option><option>2</option><option>3</option><option>4</option><option value="5+">5 o más</option></select><span class="error" id="bedrooms-error"></span></div>
-            <div class="field"><label for="bathrooms">Número de baños</label><select id="bathrooms" name="bathrooms" required><option value="">Selecciona</option><option>1</option><option>2</option><option>3</option><option>4</option><option value="5+">5 o más</option></select><span class="error" id="bathrooms-error"></span></div>
-            <div class="field"><label for="guestCapacity">¿Cuántos huéspedes puede alojar?</label><select id="guestCapacity" name="guestCapacity" required><option value="">Selecciona</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option value="10+">10 o más</option></select><span class="error" id="guestCapacity-error"></span></div>
-          </fieldset>
-
-          <fieldset class="form-step" data-step="2" hidden>
-            <legend>Situación comercial</legend>
-            <div class="field field-wide"><label for="currentSituation">¿Cuál es la situación actual de la propiedad?</label><select id="currentSituation" name="currentSituation" required><option value="">Selecciona</option><option value="available">Está disponible y sin uso</option><option value="occasional">La utilizo ocasionalmente</option><option value="long-term-rental">Está arrendada actualmente</option><option value="short-term-rental">Ya funciona como renta corta</option><option value="implementation">Está en proceso de compra o implementación</option></select><span class="error" id="currentSituation-error"></span></div>
-            <div class="field field-wide"><span class="label">¿Actualmente está publicada en alguna plataforma?</span><div class="check-grid" data-exclusive="none"><label><input type="checkbox" name="platforms" value="airbnb"> Airbnb</label><label><input type="checkbox" name="platforms" value="booking"> Booking</label><label><input type="checkbox" name="platforms" value="other"> Otra plataforma</label><label><input type="checkbox" name="platforms" value="none"> No está publicada</label></div></div>
-            <div class="field field-wide conditional" id="other-platform-wrap" hidden><label for="otherPlatform">¿Cuál otra plataforma?</label><input id="otherPlatform" name="otherPlatform" maxlength="80"></div>
-            <div class="field"><label for="primaryGoal">¿Cuál es tu principal objetivo?</label><select id="primaryGoal" name="primaryGoal" required><option value="">Selecciona</option><option>Aumentar los ingresos de la propiedad</option><option>Delegar la administración completa</option><option>Mejorar la ocupación</option><option>Mejorar el precio promedio por noche</option><option>Dejar de atender personalmente a los huéspedes</option><option>Profesionalizar la operación</option><option>Evaluar si la renta corta es conveniente</option><option>Otro</option></select><span class="error" id="primaryGoal-error"></span></div>
-            <div class="field"><label for="currentProblem">¿Cuál es hoy tu principal dificultad?</label><select id="currentProblem" name="currentProblem"><option value="">Selecciona</option><option>No tengo tiempo para administrar</option><option>Tengo pocas reservas</option><option>Los precios no están optimizados</option><option>La operación y limpieza son difíciles de coordinar</option><option>La atención de huéspedes consume demasiado tiempo</option><option>No sé cómo comenzar</option><option>No tengo dificultades, solo quiero evaluar alternativas</option><option>Otro</option></select></div>
-            <div class="field field-wide"><label for="propertyCount">¿Cuántas propiedades deseas administrar o evaluar?</label><select id="propertyCount" name="propertyCount" required><option value="">Selecciona</option><option value="1">1 propiedad</option><option value="2-3">2 a 3 propiedades</option><option value="4-10">4 a 10 propiedades</option><option value="more-than-10">Más de 10 propiedades</option></select><span class="error" id="propertyCount-error"></span></div>
-            <div class="field field-wide"><span class="label">¿Qué esperas obtener de una empresa administradora?</span><div class="check-grid"><label><input type="checkbox" name="expectations" value="profitability"> Mayor rentabilidad</label><label><input type="checkbox" name="expectations" value="occupancy"> Más ocupación</label><label><input type="checkbox" name="expectations" value="less-operation"> Menos carga operativa</label><label><input type="checkbox" name="expectations" value="guest-service"> Atención profesional de huéspedes</label><label><input type="checkbox" name="expectations" value="transparency"> Transparencia en reservas e ingresos</label><label><input type="checkbox" name="expectations" value="maintenance"> Mantenimiento y cuidado</label><label><input type="checkbox" name="expectations" value="optimization"> Optimización en Airbnb y Booking</label></div></div>
-          </fieldset>
-
-          <fieldset class="form-step" data-step="3" hidden>
-            <legend>Equipamiento y disponibilidad</legend>
+            <div class="field field-wide"><span class="label">¿Está publicada en alguna plataforma?</span><div class="check-grid" data-exclusive="none"><label><input type="checkbox" name="platforms" value="airbnb"> Airbnb</label><label><input type="checkbox" name="platforms" value="booking"> Booking</label><label><input type="checkbox" name="platforms" value="other"> Otra</label><label><input type="checkbox" name="platforms" value="none"> No está publicada</label></div><span class="error" id="platforms-error"></span></div>
+            <div class="field field-wide conditional" id="other-platform-wrap" hidden><label for="otherPlatform">¿Cuál?</label><input id="otherPlatform" name="otherPlatform" maxlength="80"><span class="error" id="otherPlatform-error"></span></div>
             <div class="field"><label for="furnishedStatus">¿La propiedad está amoblada?</label><select id="furnishedStatus" name="furnishedStatus" required><option value="">Selecciona</option><option value="complete">Sí, completamente</option><option value="partial">Parcialmente</option><option value="no">No</option><option value="implementation">Está en proceso de implementación</option></select><span class="error" id="furnishedStatus-error"></span></div>
-            <div class="field"><label for="parking">¿Cuenta con estacionamiento?</label><select id="parking" name="parking"><option value="">Selecciona</option><option value="private">Sí, privado</option><option value="shared">Sí, compartido o sujeto a disponibilidad</option><option value="no">No</option></select></div>
+            <div class="field"><label for="parking">¿Cuenta con estacionamiento?</label><select id="parking" name="parking" required><option value="">Selecciona</option><option value="private">Sí, privado</option><option value="shared">Sí, compartido o sujeto a disponibilidad</option><option value="no">No</option></select><span class="error" id="parking-error"></span></div>
             <div class="field"><label for="pool">¿La propiedad cuenta con piscina en sus instalaciones?</label><select id="pool" name="pool" required><option value="">Selecciona</option><option value="yes">Sí</option><option value="no">No</option><option value="unknown">No estoy seguro</option></select><span class="error" id="pool-error"></span></div>
             <div class="field"><label for="laundry">¿Cuenta con lavadora o lavandería?</label><select id="laundry" name="laundry" required><option value="">Selecciona</option><option value="inside">Lavadora dentro de la propiedad</option><option value="building">Lavandería en el edificio o condominio</option><option value="both">Cuenta con ambas alternativas</option><option value="none">No cuenta con ninguna</option><option value="unknown">No estoy seguro</option></select><span class="error" id="laundry-error"></span></div>
             <div class="field field-wide"><label for="startTime">¿Cuándo te gustaría comenzar?</label><select id="startTime" name="startTime" required><option value="">Selecciona</option><option value="immediate">Lo antes posible</option><option value="within-30-days">Dentro de 30 días</option><option value="one-to-three-months">Dentro de 1 a 3 meses</option><option value="more-than-three-months">En más de 3 meses</option><option value="evaluating">Solo estoy evaluando</option></select><span class="error" id="startTime-error"></span></div>
-            <div class="field field-wide upload-placeholder"><span class="label">Fotografías de la propiedad (opcional)</span><p>La carga de fotografías estará disponible cuando conectemos el almacenamiento seguro. Podrás enviar tu evaluación sin adjuntarlas.</p></div>
           </fieldset>
 
-          <fieldset class="form-step" data-step="4" hidden>
-            <legend>Datos de contacto</legend>
+          <fieldset class="form-step" data-step="2" hidden>
+            <legend>Contacto</legend>
             <div class="field"><label for="fullName">Nombre y apellido</label><input id="fullName" name="fullName" autocomplete="name" maxlength="120" required><span class="error" id="fullName-error"></span></div>
             <div class="field"><label for="email">Correo electrónico</label><input id="email" name="email" type="email" autocomplete="email" maxlength="160" required><span class="error" id="email-error"></span></div>
             <div class="field"><label for="whatsapp">WhatsApp</label><input id="whatsapp" name="whatsapp" type="tel" autocomplete="tel" inputmode="tel" placeholder="Ejemplo: +56912345678" maxlength="24" required><small>Incluye el signo + y el código de país.</small><span class="error" id="whatsapp-error"></span></div>
