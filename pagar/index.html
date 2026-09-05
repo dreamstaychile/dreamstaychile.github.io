@@ -35,8 +35,9 @@
     .dreamstay-copy{line-height:1.02;white-space:nowrap}
     .dreamstay-name{color:var(--coral);font-size:22px;font-weight:800;letter-spacing:-.4px}
     .dreamstay-tagline{margin-top:5px;color:#8A8A8A;font-size:8px;font-weight:700;letter-spacing:1.15px}
-    .separator{width:1px;height:48px;background:var(--border);flex:0 0 1px}
-    .mp-logo{width:190px;max-width:45%;height:auto;display:block}
+    .separator{width:1px;height:52px;background:var(--border);flex:0 0 1px}
+    .mp-mark-wrap{width:82px;height:72px;overflow:hidden;position:relative;flex:0 0 82px}
+    .mp-mark{position:absolute;height:96px;width:auto;max-width:none;left:-24px;top:-10px;display:block}
     h1{margin:0;text-align:center;font-size:26px;letter-spacing:-.45px}
     .intro{margin:9px 0 28px;text-align:center;color:var(--muted);font-size:14px;line-height:1.5}
     label{display:block;margin-bottom:9px;font-size:13px;font-weight:700}
@@ -52,8 +53,8 @@
     button:active{transform:translateY(1px)}
     .secure{margin-top:15px;text-align:center;color:var(--muted);font-size:12px}.secure strong{color:var(--text)}
     .footer{margin-top:24px;padding-top:18px;border-top:1px solid var(--border);text-align:center;color:#888;font-size:11px}
-    @media(max-width:520px){body{padding:14px}.card{padding:28px 20px 24px;border-radius:20px}.brands{gap:14px;margin-bottom:26px}.dreamstay-icon{width:48px;height:48px}.dreamstay-name{font-size:18px}.dreamstay-tagline{font-size:7px;letter-spacing:.9px}.separator{height:42px}.mp-logo{width:160px;max-width:43%}h1{font-size:23px}}
-    @media(max-width:380px){.brands{gap:10px}.dreamstay-icon{width:42px;height:42px}.dreamstay-name{font-size:16px}.dreamstay-tagline{display:none}.mp-logo{width:140px}}
+    @media(max-width:520px){body{padding:14px}.card{padding:28px 20px 24px;border-radius:20px}.brands{gap:14px;margin-bottom:26px}.dreamstay-icon{width:48px;height:48px}.dreamstay-name{font-size:18px}.dreamstay-tagline{font-size:7px;letter-spacing:.9px}.separator{height:46px}.mp-mark-wrap{width:70px;height:62px;flex-basis:70px}.mp-mark{height:84px;left:-21px;top:-9px}h1{font-size:23px}}
+    @media(max-width:380px){.brands{gap:10px}.dreamstay-icon{width:42px;height:42px}.dreamstay-name{font-size:16px}.dreamstay-tagline{display:none}.mp-mark-wrap{width:64px;height:58px;flex-basis:64px}.mp-mark{height:78px;left:-19px;top:-8px}}
   </style>
 </head>
 <body>
@@ -67,7 +68,9 @@
         </div>
       </div>
       <div class="separator" aria-hidden="true"></div>
-      <img class="mp-logo" src="../assets/mercadopago-logo.svg" alt="Mercado Pago" />
+      <div class="mp-mark-wrap" aria-label="Mercado Pago">
+        <img class="mp-mark" src="../assets/mercadopago-logo.svg" alt="Mercado Pago" />
+      </div>
     </div>
 
     <h1>Realiza tu pago</h1>
