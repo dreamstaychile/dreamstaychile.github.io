@@ -44,9 +44,11 @@
     label{display:block;margin-bottom:9px;font-size:13px;font-weight:700}
     .amount{display:flex;align-items:center;min-height:66px;border:1.5px solid #DCDCDC;border-radius:16px;padding:0 16px;background:#fff;transition:.2s ease}
     .amount:focus-within{border-color:var(--mp-blue);box-shadow:0 0 0 4px rgba(0,158,227,.09)}
+    .amount.fixed{background:#FAFAFA}
     .symbol{margin-right:10px;font-size:24px;font-weight:800}
     input{min-width:0;width:100%;border:0;outline:0;background:transparent;color:var(--text);font-size:26px;font-weight:750}
     input::placeholder{color:#A0A0A0}
+    input[readonly]{cursor:default}
     .currency{margin-left:10px;color:var(--muted);font-size:12px;font-weight:700}
     .error{display:none;margin:8px 2px 0;color:#B42318;font-size:12px;font-weight:600}
     button{width:100%;min-height:58px;margin-top:20px;border:0;border-radius:14px;background:var(--mp-blue);color:#fff;font-size:16px;font-weight:800;cursor:pointer;transition:.15s ease}
@@ -79,7 +81,7 @@
 
     <form id="paymentForm" novalidate>
       <label for="amount">Monto a pagar</label>
-      <div class="amount">
+      <div class="amount" id="amountBox">
         <span class="symbol">$</span>
         <input id="amount" type="text" inputmode="numeric" autocomplete="off" placeholder="90.000" />
         <span class="currency">CLP</span>
@@ -94,9 +96,41 @@
 
   <script>
     const MERCADO_PAGO_URL="https://link.mercadopago.cl/dreamstay";
-    const form=document.getElementById("paymentForm"),input=document.getElementById("amount"),error=document.getElementById("error");
-    input.addEventListener("input",()=>{const digits=input.value.replace(/\D/g,"").slice(0,9);input.value=digits?new Intl.NumberFormat("es-CL").format(Number(digits)):"";error.style.display="none"});
-    form.addEventListener("submit",event=>{event.preventDefault();const amount=Number(input.value.replace(/\D/g,""));if(!Number.isFinite(amount)||amount<=0){error.style.display="block";input.focus();return}window.location.href=MERCADO_PAGO_URL});
+    const form=document.getElementById("paymentForm");
+    const input=document.getElementById("amount");
+    const amountBox=document.getElementById("amountBox");
+    const error=document.getElementById("error");
+    const formatter=new Intl.NumberFormat("es-CL");
+
+    const params=new URLSearchParams(window.location.search);
+    const preset=(params.get("monto")||"").replace(/\D/g,"").slice(0,9);
+    const fixed=params.get("fijo")==="1";
+
+    if(preset){
+      input.value=formatter.format(Number(preset));
+      if(fixed){
+        input.readOnly=true;
+        input.setAttribute("aria-readonly","true");
+        amountBox.classList.add("fixed");
+      }
+    }
+
+    input.addEventListener("input",()=>{
+      const digits=input.value.replace(/\D/g,"").slice(0,9);
+      input.value=digits?formatter.format(Number(digits)):"";
+      error.style.display="none";
+    });
+
+    form.addEventListener("submit",event=>{
+      event.preventDefault();
+      const amount=Number(input.value.replace(/\D/g,""));
+      if(!Number.isFinite(amount)||amount<=0){
+        error.style.display="block";
+        input.focus();
+        return;
+      }
+      window.location.href=MERCADO_PAGO_URL;
+    });
   </script>
 </body>
 </html>
