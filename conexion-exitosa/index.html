@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Conexión exitosa · Dream Stay</title>
+  <style>
+    :root{
+      --coral:#ef7778;
+      --teal:#59b7aa;
+      --ink:#183331;
+      --muted:#6d7d7a;
+      --line:#e4ecea;
+      --bg:#f7faf9;
+      --card:#fff;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      padding:24px;
+      background:
+        radial-gradient(circle at 12% 8%,rgba(89,183,170,.15),transparent 32%),
+        radial-gradient(circle at 88% 92%,rgba(239,119,120,.13),transparent 34%),
+        var(--bg);
+      color:var(--ink);
+      font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    }
+    main{
+      width:min(100%,560px);
+      padding:40px 34px;
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:24px;
+      text-align:center;
+      box-shadow:0 22px 64px rgba(24,51,49,.10);
+    }
+    .logo{
+      width:min(235px,72%);
+      height:auto;
+      display:block;
+      margin:0 auto 28px;
+    }
+    .check{
+      width:68px;
+      height:68px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      margin:0 auto 20px;
+      background:rgba(89,183,170,.14);
+      color:var(--teal);
+      font-size:36px;
+      font-weight:900;
+    }
+    h1{
+      margin:0;
+      font-size:clamp(28px,5vw,38px);
+      line-height:1.08;
+      letter-spacing:-.03em;
+    }
+    p{
+      max-width:440px;
+      margin:14px auto 0;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.65;
+    }
+    .status{
+      margin-top:26px;
+      padding:13px 16px;
+      border-radius:12px;
+      border:1px solid rgba(89,183,170,.28);
+      background:rgba(89,183,170,.08);
+      font-size:13px;
+      font-weight:800;
+    }
+    footer{
+      margin-top:30px;
+      color:#8a9996;
+      font-size:12px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <img class="logo" src="/assets/logo-coral.png" alt="Dream Stay">
+    <div class="check" aria-hidden="true">✓</div>
+    <h1>Conexión realizada correctamente</h1>
+    <p>Tu cuenta quedó vinculada con Dream Stay. Ya puedes cerrar esta ventana y continuar con el proceso habitual.</p>
+    <div class="status">Integración conectada correctamente</div>
+    <footer>Dream Stay · Bienvenido, siempre</footer>
+  </main>
+</body>
+</html>
