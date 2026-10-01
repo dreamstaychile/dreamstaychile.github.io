@@ -140,6 +140,8 @@
       }
     }
 
+    updateFeeSummary();
+
     input.addEventListener("input",()=>{
       const digits=input.value.replace(/\D/g,"").slice(0,9);
       input.value=digits?formatter.format(Number(digits)):"";
@@ -157,6 +159,9 @@
         return;
       }
 
+      const payment=calculatePayment(amount);
+      const amountToCharge=payment.total;
+
       error.style.display="none";
       payButton.disabled=true;
       payButton.textContent="Abriendo Mercado Pago...";
@@ -165,7 +170,7 @@
         const response=await fetch(PAYMENT_API,{
           method:"POST",
           headers:{"Content-Type":"application/json"},
-          body:JSON.stringify({amount,reference})
+          body:JSON.stringify({amount:amountToCharge,reference})
         });
 
         const data=await response.json().catch(()=>({}));
