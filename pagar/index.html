@@ -53,6 +53,12 @@
     input[readonly]{cursor:default}
     .currency{margin-left:10px;color:var(--muted);font-size:12px;font-weight:700}
     .error{display:none;margin:8px 2px 0;color:#B42318;font-size:12px;font-weight:600}
+    .fee-summary{margin-top:12px;padding:12px 14px;border:1px solid var(--border);border-radius:12px;background:#FAFAFA}
+    .fee-row{display:flex;align-items:center;justify-content:space-between;gap:16px;color:var(--muted);font-size:12px;line-height:1.35}
+    .fee-row+.fee-row{margin-top:8px;padding-top:8px;border-top:1px solid var(--border)}
+    .fee-row.total{color:var(--text);font-size:13px;font-weight:700}
+    .fee-row.total strong{font-size:15px}
+    .fee-note{margin-top:8px;color:#8A8A8A;font-size:10.5px;line-height:1.4}
     button{width:100%;min-height:58px;margin-top:20px;border:0;border-radius:14px;background:var(--mp-blue);color:#fff;font-size:16px;font-weight:800;cursor:pointer;transition:.15s ease}
     button:hover{filter:brightness(.96)}
     button:active{transform:translateY(1px)}
@@ -110,6 +116,17 @@
         <span class="currency">CLP</span>
       </div>
       <div id="error" class="error">Ingresa un monto válido.</div>
+      <div id="feeSummary" class="fee-summary" hidden>
+        <div class="fee-row">
+          <span>Cargo por procesamiento Mercado Pago (2,69%)</span>
+          <span id="feeAmount">$0</span>
+        </div>
+        <div class="fee-row total">
+          <span>Total a pagar</span>
+          <strong id="totalAmount">$0</strong>
+        </div>
+        <div class="fee-note">El total incluye el cargo asociado al procesamiento mediante Mercado Pago.</div>
+      </div>
       <button id="payButton" type="submit">Pagar con Mercado Pago</button>
       <div class="secure">🔒 Pago seguro procesado por <strong>Mercado Pago</strong></div>
     </form>
@@ -124,12 +141,41 @@
     const amountBox=document.getElementById("amountBox");
     const error=document.getElementById("error");
     const payButton=document.getElementById("payButton");
+    const feeSummary=document.getElementById("feeSummary");
+    const feeAmount=document.getElementById("feeAmount");
+    const totalAmount=document.getElementById("totalAmount");
     const formatter=new Intl.NumberFormat("es-CL");
+    const MP_FEE_RATE=0.0269;
 
     const params=new URLSearchParams(window.location.search);
     const preset=(params.get("monto")||"").replace(/\D/g,"").slice(0,9);
     const fixed=params.get("fijo")==="1";
+    const commissionEnabled=params.get("comision")==="1";
     const reference=(params.get("ref")||"").trim().slice(0,80);
+
+    const calculatePayment=(baseAmount)=>{
+      if(!commissionEnabled||!Number.isFinite(baseAmount)||baseAmount<=0){
+        return {base:baseAmount||0,fee:0,total:baseAmount||0};
+      }
+      const total=Math.round(baseAmount/(1-MP_FEE_RATE));
+      return {base:baseAmount,fee:total-baseAmount,total};
+    };
+
+    const updateFeeSummary=()=>{
+      if(!commissionEnabled){
+        feeSummary.hidden=true;
+        return;
+      }
+      const baseAmount=Number(input.value.replace(/\D/g,""));
+      if(!Number.isFinite(baseAmount)||baseAmount<=0){
+        feeSummary.hidden=true;
+        return;
+      }
+      const payment=calculatePayment(baseAmount);
+      feeAmount.textContent="$"+formatter.format(payment.fee);
+      totalAmount.textContent="$"+formatter.format(payment.total);
+      feeSummary.hidden=false;
+    };
 
     if(preset){
       input.value=formatter.format(Number(preset));
@@ -146,6 +192,7 @@
       const digits=input.value.replace(/\D/g,"").slice(0,9);
       input.value=digits?formatter.format(Number(digits)):"";
       error.style.display="none";
+      updateFeeSummary();
     });
 
     form.addEventListener("submit",async event=>{
