@@ -8,7 +8,7 @@
   const submitButton = document.querySelector('#submit');
   const alertBox = document.querySelector('#form-alert');
   const success = document.querySelector('#success');
-  const storageKey = 'dreamstay-property-lead-v2';
+  const storageKey = `dreamstay-property-lead-v3:${location.pathname.replace(/\/$/, '')}`;
   const stepNames = ['Propiedad y equipamiento', 'Contacto'];
   let currentStep = 1;
   let started = false;
