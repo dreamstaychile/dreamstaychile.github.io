@@ -13,16 +13,34 @@
   let currentStep = 1;
   let started = false;
 
+  // Events are anonymous; never forward contact details or street addresses to analytics.
+  // dataLayer consumers (e.g. GTM) can map property_form_success to a GA4 key event.
+  window.dataLayer = window.dataLayer || [];
+  const marketFromPath = location.pathname.match(/\\/administracion-airbnb\\/([^/]+)\\/?$/)?.[1] || 'general';
   const analytics = (eventName, properties = {}) => {
     const safe = { ...properties };
-    ['address', 'fullName', 'email', 'whatsapp', 'comments'].forEach(key => delete safe[key]);
-    window.dataLayer?.push({ event: eventName, ...safe });
+    ['address', 'fullName', 'email', 'whatsapp', 'comments', 'referrer'].forEach(key => delete safe[key]);
+    window.dataLayer.push({ event: eventName, lead_market: marketFromPath, form_id: 'property-form', ...safe });
   };
 
+  const attributionStorageKey = 'dreamstay-lead-attribution-v1';
   const getUtmData = () => {
     const query = new URLSearchParams(location.search);
     const map = { utm_source: 'source', utm_medium: 'medium', utm_campaign: 'campaign', utm_content: 'content', utm_term: 'term', gclid: 'gclid', fbclid: 'fbclid' };
-    return Object.fromEntries(Object.entries(map).map(([queryKey, dataKey]) => [dataKey, query.get(queryKey) || '']).filter(([, value]) => value));
+    const current = Object.fromEntries(Object.entries(map).map(([queryKey, dataKey]) => [dataKey, (query.get(queryKey) || '').slice(0, 160)]).filter(([, value]) => value));
+    let attribution = { first: {}, last: {} };
+    try { attribution = JSON.parse(sessionStorage.getItem(attributionStorageKey)) || attribution; } catch {}
+    if (Object.keys(current).length) {
+      if (!Object.keys(attribution.first || {}).length) attribution.first = current;
+      attribution.last = current;
+      try { sessionStorage.setItem(attributionStorageKey, JSON.stringify(attribution)); } catch {}
+    }
+    return attribution;
+  };
+  const getLastTouch = () => getUtmData().last || {};
+  const getAttribution = () => {
+    const data = getUtmData();
+    return { firstTouch: data.first || {}, lastTouch: data.last || {} };
   };
 
   const showStep = step => {
@@ -96,7 +114,7 @@
   const persist = () => {
     const data = serialize();
     delete data.fullName; delete data.email; delete data.whatsapp; delete data.comments;
-    sessionStorage.setItem(storageKey, JSON.stringify({ savedAt: Date.now(), data, utm: getUtmData() }));
+    sessionStorage.setItem(storageKey, JSON.stringify({ savedAt: Date.now(), data, utm: getLastTouch() }));
   };
 
   const restore = () => {
@@ -120,7 +138,7 @@
   };
 
   form.addEventListener('input', event => {
-    if (!started) { started = true; analytics('property_form_started'); }
+    if (!started) { started = true; analytics('property_form_started', { ...getLastTouch() }); }
     if (event.target.id === 'comments') document.querySelector('#comment-count').textContent = event.target.value.length;
     if (event.target.matches('[required]')) validateField(event.target);
     toggleConditionals(); persist();
@@ -145,7 +163,7 @@
     if (!validateStep(2)) return;
     if (form.website.value) return;
     analytics('property_form_step_2_completed', { form_step: 2 });
-    analytics('property_form_submitted');
+    analytics('property_form_attempt', { ...getLastTouch() });
     const endpoint = window.DREAM_STAY_LEADS_ENDPOINT;
     if (!endpoint) {
       alertBox.textContent = 'El canal seguro de recepción aún no está configurado. Escríbenos a contacto@dreamstaychile.com mientras completamos la integración.';
@@ -155,7 +173,8 @@
     }
     submitButton.disabled = true;
     submitButton.textContent = 'Enviando…';
-    const payload = { ...serialize(), honeypot: form.website.value, ...getUtmData(), referrer: document.referrer, landingPage: location.href.split('?')[0], source: getUtmData().source || 'direct', submittedAt: new Date().toISOString() };
+    const attribution = getAttribution();
+    const payload = { ...serialize(), honeypot: form.website.value, ...attribution.lastTouch, firstTouch: attribution.firstTouch, leadMarket: marketFromPath, referrer: document.referrer.slice(0, 500), landingPage: location.origin + location.pathname, source: attribution.lastTouch.source || 'direct', submittedAt: new Date().toISOString() };
     try {
       // text/plain evita una solicitud CORS de preflight que Google Apps Script no gestiona.
       const response = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
@@ -164,7 +183,7 @@
       if (!result.ok) throw new Error('Lead rejected');
       sessionStorage.removeItem(storageKey);
       form.hidden = true; document.querySelector('.progress-wrap').hidden = true; success.hidden = false; success.focus();
-      analytics('property_form_success');
+      analytics('property_form_success', { ...getLastTouch() });
     } catch {
       alertBox.textContent = 'No pudimos enviar la información. Revisa tu conexión e inténtalo nuevamente.';
       alertBox.hidden = false;
@@ -172,8 +191,8 @@
     } finally { submitButton.disabled = false; submitButton.textContent = 'Solicitar evaluación'; }
   });
 
-  document.querySelectorAll('.track-cta').forEach(link => link.addEventListener('click', () => analytics('property_cta_clicked')));
+  document.querySelectorAll('.track-cta').forEach(link => link.addEventListener('click', () => analytics('property_cta_clicked', { ...getLastTouch() })));
   document.querySelector('#year').textContent = new Date().getFullYear();
-  analytics('property_landing_view', getUtmData());
+  analytics('property_landing_view', { ...getLastTouch() });
   restore(); toggleConditionals();
 })();
