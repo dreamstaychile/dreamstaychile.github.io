@@ -1,6 +1,15 @@
 (() => {
   'use strict';
 
+  // El archivo es compartido por todas las landing pages: carga centralizada de GA4.
+  if (!document.querySelector('script[data-ds-analytics]')) {
+    const consentScript = document.createElement('script');
+    consentScript.src = '/assets/analytics-consent.js';
+    consentScript.defer = true;
+    consentScript.dataset.dsAnalytics = 'true';
+    document.head.appendChild(consentScript);
+  }
+
   const form = document.querySelector('#property-form');
   const steps = [...document.querySelectorAll('.form-step')];
   const nextButton = document.querySelector('#next');
@@ -20,7 +29,10 @@
   const analytics = (eventName, properties = {}) => {
     const safe = { ...properties };
     ['address', 'fullName', 'email', 'whatsapp', 'comments', 'referrer'].forEach(key => delete safe[key]);
-    window.dataLayer.push({ event: eventName, lead_market: marketFromPath, form_id: 'property-form', ...safe });
+    // No procesar eventos de analítica sin autorización.
+    if (window.DreamStayAnalytics?.getConsent() === 'granted') {
+      window.DreamStayAnalytics.track(eventName, { lead_market: marketFromPath, form_id: 'property-form', ...safe });
+    }
   };
 
   const attributionStorageKey = 'dreamstay-lead-attribution-v1';
