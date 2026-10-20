@@ -16,7 +16,7 @@
   // Events are anonymous; never forward contact details or street addresses to analytics.
   // dataLayer consumers (e.g. GTM) can map property_form_success to a GA4 key event.
   window.dataLayer = window.dataLayer || [];
-  const marketFromPath = location.pathname.match(/\\/administracion-airbnb\\/([^/]+)\\/?$/)?.[1] || 'general';
+  const marketFromPath = location.pathname.split('/').filter(Boolean)[0] === 'administracion-airbnb' ? (location.pathname.split('/').filter(Boolean)[1] || 'general') : 'general';
   const analytics = (eventName, properties = {}) => {
     const safe = { ...properties };
     ['address', 'fullName', 'email', 'whatsapp', 'comments', 'referrer'].forEach(key => delete safe[key]);
