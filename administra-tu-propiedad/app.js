@@ -7,6 +7,12 @@
     consentScript.src = '/assets/analytics-consent.js';
     consentScript.defer = true;
     consentScript.dataset.dsAnalytics = 'true';
+    consentScript.addEventListener('load', () => {
+      // Para visitantes que ya aceptaron, registrar la visita tras cargar el módulo.
+      if (window.DreamStayAnalytics?.getConsent() === 'granted') {
+        window.DreamStayAnalytics.track('property_landing_view', { lead_market: location.pathname.split('/').filter(Boolean)[1] || 'general' });
+      }
+    });
     document.head.appendChild(consentScript);
   }
 
